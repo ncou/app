@@ -47,38 +47,7 @@ real web server could be pointed to `/public/index.php`.
 
 More routes could be added by editing `src/Factory/AppRouterFactory`.
 
-
 ## Installation
-
-```
-composer create-project spiral/app
-```
-
-> Application server will be downloaded automatically (`php-curl` and `php-zip` required).
-
-Once the application is installed you can ensure that it was configured properly by executing:
-
-```
-$ php ./app.php configure
-```
-
-To start application server execute:
-
-```
-$ ./spiral serve -v -d
-```
-
-On Windows:
-
-```$xslt
-$ spiral.exe serve -v -d
-```
-
-Application will be available on `http://localhost:8080`.
-
-> Read more about application server configuration [here](https://roadrunner.dev/docs).
-
-## Installation2
 
 ```bash
 composer create-project spiral/app
