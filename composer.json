@@ -1,18 +1,20 @@
 {
     "name": "chiron/app",
     "type": "project",
-    "description": "Chiron app",
+    "description": "Chiron Skeleton Application",
     "homepage": "https://github.com/ncou/app",
     "keywords": [
         "chiron",
+        "skeleton",
+        "application",
         "app"
     ],
     "license": "MIT",
     "require": {
         "php": "^7.2",
-        "chiron/chiron": "^2.6",
+        "chiron/chiron": "^2.7",
         "chiron/php-renderer": "^1.6",
-        "filp/whoops": "^2.7",
+        "chiron/router-fastroute": "^0.5",
         "nyholm/psr7": "^1.2"
     },
     "require-dev": {
