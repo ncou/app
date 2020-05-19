@@ -34,7 +34,8 @@
     "scripts": {
         "post-create-project-cmd": [
             "@php -r \"file_exists('app/.env') || copy('app/.env.example', 'app/.env');\"",
-            "bash bin/chiron encrypt::key -m app/.env"
+            "bash bin/chiron encrypt::key -m app/.env",
+            "bash bin/chiron runtime -vv"
         ],
         "start": "php -S localhost:8080 -t public/",
         "serve": "bash bin/chiron serve",
