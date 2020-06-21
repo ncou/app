@@ -19,9 +19,10 @@ use Monolog\Formatter\LineFormatter;
 use Monolog\Processor\PsrLogMessageProcessor;
 use Psr\Log\LoggerInterface;
 use Chiron\ErrorHandler\ErrorManager;
+use Chiron\Bootload\AbstractBootloader;
 
 
-class LoggerBootloader implements BootloaderInterface
+class LoggerBootloader extends AbstractBootloader
 {
     private const NAME = 'CHIRON';
     private const DEFAULT = 'default';
@@ -50,10 +51,6 @@ class LoggerBootloader implements BootloaderInterface
 */
 
 
-    public function register(BindingInterface $container): void
-    {
-    }
-
     //https://github.com/spiral/app/blob/master/app/src/Bootloader/LoggingBootloader.php
     //https://github.com/spiral/monolog-bridge/blob/master/src/Bootloader/MonologBootloader.php
     //https://github.com/spiral/monolog-bridge/blob/master/src/LogFactory.php#L70
@@ -61,7 +58,7 @@ class LoggerBootloader implements BootloaderInterface
     public function boot(ErrorManager $manager): void
     {
         $handlerA = new RotatingFileHandler(
-            directory('runtime') . 'logs/error.log',
+            directory('@runtime/logs/error.log'),
             25,
             Logger::ERROR,
             false,
@@ -72,7 +69,7 @@ class LoggerBootloader implements BootloaderInterface
         $handlerA->setFormatter(new LineFormatter("[%datetime%] %level_name%: %message% %context%\n"));
 
         $handlerB = new RotatingFileHandler(
-            directory('runtime') . 'logs/debug.log',
+            directory('@runtime/logs/debug.log'),
             0,
             Logger::DEBUG,
             false,

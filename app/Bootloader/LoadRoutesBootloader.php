@@ -8,7 +8,7 @@ use Chiron\Http\Response\HtmlResponse;
 use Psr\Container\ContainerInterface;
 use Chiron\Views\TemplateRendererInterface;
 use Chiron\Container\Container;
-use Chiron\Bootload\BootloaderInterface;
+use Chiron\Bootload\AbstractBootloader;
 use LogicException;
 use SplFileInfo;
 use Symfony\Component\Finder\Finder;
@@ -35,7 +35,7 @@ use Chiron\Container\BindingInterface;
 use Chiron\Facade\Routing;
 use Chiron\Facade\Target;
 
-class LoadRoutesBootloader implements BootloaderInterface
+class LoadRoutesBootloader extends AbstractBootloader
 {
 
 

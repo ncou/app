@@ -115,20 +115,12 @@ return [
         Chiron\Dispatcher\ConsoleDispatcher::class,
         Chiron\Dispatcher\SapiDispatcher::class,
         Chiron\Dispatcher\RrDispatcher::class,
-        //Chiron\Dispatcher\ReactDispatcher::class,
     ],
 
-    'providers' => [
-        Chiron\Router\FastRoute\Provider\FastRouteRouterServiceProvider::class,
-        Chiron\Views\Provider\PhpRendererServiceProvider::class,
-        //Providers\DatabaseServiceProvider::class,
-    ],
+    'providers' => [],
 
     'bootloaders' => [
-        Chiron\Bootloader\ViewBootloader::class,
-        Chiron\Bootloader\HttpBootloader::class,
-        Chiron\Bootloader\RouteCollectorBootloader::class,
-        App\Bootloader\LoggerBootloader::class,
+        //App\Bootloader\LoggerBootloader::class,
         App\Bootloader\LoadRoutesBootloader::class,
     ],
 
