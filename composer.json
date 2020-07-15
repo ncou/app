@@ -35,14 +35,14 @@
     },
     "scripts": {
         "post-autoload-dump": [
-            "bash bin/chiron cache::clear",
-            "bash bin/chiron package::discover"
+            "bash bin/chiron cache:clear",
+            "bash bin/chiron package:discover"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('app/.env') || copy('app/.env.example', 'app/.env');\""
         ],
         "post-create-project-cmd": [
-            "bash bin/chiron encrypt::key -m app/.env"
+            "bash bin/chiron encrypt:key -m app/.env"
         ],
         "start": "php -S localhost:8080 -t public/",
         "serve": "bash bin/chiron serve",
