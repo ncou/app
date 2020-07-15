@@ -13,7 +13,7 @@
     "require": {
         "php": "^7.2",
         "chiron/chiron": "^3.3",
-        "chiron/php-renderer": "^1.8",
+        "chiron/php-renderer": "^1.9.1",
         "chiron/router-fastroute": "^0.8",
         "filp/whoops": "^2.7",
         "nyholm/psr7": "^1.2",
