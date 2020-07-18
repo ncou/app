@@ -10,6 +10,6 @@ if (! is_file($autoload)) {
 
 require_once $autoload;
 
-$paths = require_once dirname(__DIR__) . '/config/paths.php';
+$paths = require_once dirname(__DIR__) . '/bootstrap/paths.php';
 $app = Chiron\Application::init($paths);
 $app->run();
