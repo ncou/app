@@ -2,14 +2,12 @@
 
 declare(strict_types=1);
 
-$autoload = dirname(__DIR__) . '/vendor/autoload.php';
+$currentDir = PHP_SAPI === 'cli' ? getcwd() : realpath(getcwd().'/../');
 
-if (! is_file($autoload)) {
-    die('You need to set up the project dependencies using Composer.');
-}
+require_once $currentDir . '/bootstrap/requirements.php';
+require_once $currentDir . '/vendor/autoload.php';
 
-require_once $autoload;
-
-$paths = require_once dirname(__DIR__) . '/bootstrap/paths.php';
+$paths = require_once $currentDir . '/bootstrap/paths.php';
 $app = Chiron\Application::init($paths);
-$app->run();
+
+exit($app->run());

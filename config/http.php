@@ -1,8 +1,7 @@
 <?php
 
-use Chiron\Http\Middleware\CheckMaintenanceMiddleware;
-use Chiron\Http\Middleware\ErrorHandlerMiddleware;
+declare(strict_types=1);
 
 return [
-        'basePath'        => '/',
-    ];
+        'basePath'        => '/app/public',
+];
