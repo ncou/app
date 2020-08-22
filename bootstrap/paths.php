@@ -12,5 +12,4 @@ return [
     '@vendor'       => '@root/vendor/',
     '@views'        => '@resources/views/',
     '@cache'        => '@runtime/cache/',
-    '@logs'         => '@runtime/logs/',
 ];
