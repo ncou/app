@@ -39,7 +39,8 @@ class LoadRoutesBootloader extends AbstractBootloader
 {
 
 
-    public function boot(RouteCollector $routing, TargetFactory $target)
+    //public function boot(RouteCollector $routing, TargetFactory $target)
+    public function boot()
     {
         //https://github.com/laravel/framework/blob/master/src/Illuminate/Foundation/Bootstrap/RegisterFacades.php
         /*
