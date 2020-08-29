@@ -103,6 +103,19 @@ $ php app.php configure -vv
 $ ./vendor/bin/spiral get
 ```
 
+## Server
+
+You can launch a php server to quickly test you application.
+
+```bash
+$ php -S localhost:8080 -t public/
+```
+or
+
+```bash
+$ bash bin/chiron serve
+```
+
 ## License
 
 MIT License (MIT). Please see [`LICENSE`](./LICENSE) for more information. Maintained by [Spiral Scout](https://spiralscout.com).

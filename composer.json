@@ -42,12 +42,6 @@
             "@php -r \"copy('.env.example', '.env');\"",
             "bash bin/chiron encrypt:key -m .env"
         ],
-        "start": "php -S localhost:8080 -t public/",
-        "serve": "bash bin/chiron serve",
         "test": "phpunit --colors=always"
-    },
-    "config": {
-        "process-timeout": 0,
-        "sort-packages": true
     }
 }
