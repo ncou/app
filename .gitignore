@@ -2,4 +2,4 @@
 /composer.phar
 /composer.lock
 # Ignore personal config files (dev)
-app/.env
+.env
