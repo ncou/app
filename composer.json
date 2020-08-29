@@ -39,7 +39,7 @@
             "bash bin/chiron package:discover"
         ],
         "post-create-project-cmd": [
-            "@php -r \"copy('.env.example', '.env');\"",
+            "php -r \"copy('.env.example', '.env');\"",
             "bash bin/chiron encrypt:key -m .env"
         ],
         "test": "phpunit --colors=always"
