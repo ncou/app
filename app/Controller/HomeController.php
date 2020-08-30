@@ -10,7 +10,7 @@ use Chiron\Views\TemplateRendererInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
-class MainController
+class HomeController
 {
     /**
      * Dependency injection container
@@ -18,7 +18,6 @@ class MainController
      * @var ContainerInterface
      */
     private $container;
-
 
     // TODO : lui passer plutot en paramétre le container, mais dans ce cas il faut pouvoir externaliser le container !!!!
     public function __construct(ContainerInterface $container)

@@ -29,7 +29,7 @@ use Chiron\Router\Target\Callback;
 use Chiron\Router\Target\Action;
 use Chiron\Router\Target\TargetFactory;
 use Chiron\Router\Route;
-use Chiron\Router\RouteCollector;
+use Chiron\Routing\RouteCollection;
 use Chiron\Container\BindingInterface;
 
 use Chiron\Facade\Routing;
@@ -40,7 +40,7 @@ class LoadRoutesBootloader extends AbstractBootloader
 
 
     //public function boot(RouteCollector $routing, TargetFactory $target)
-    public function boot()
+    public function boot(RouteCollection $routes)
     {
         //https://github.com/laravel/framework/blob/master/src/Illuminate/Foundation/Bootstrap/RegisterFacades.php
         /*
@@ -64,7 +64,8 @@ class LoadRoutesBootloader extends AbstractBootloader
 
         //Routing::get('/{action}')->to(Target::action('\Controllers\MainController', 'index'))->name('home');
 
-        Routing::get('/{action}')->to(Target::callback([\App\Controller\MainController::class, 'index']));
+        //Routing::get('/{action}')->to(Target::callback([\App\Controller\HomeController::class, 'index']))->name('home');
+        $routes->map('/{action}')->method('GET')->to(Target::callback([\App\Controller\HomeController::class, 'index']))->name('home');
 
         //$routing->view('/test', 'test');
     }
