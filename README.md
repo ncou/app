@@ -1,88 +1,74 @@
-<p align="center">
-    <a href="http://www.yiiframework.com/" target="_blank">
-        <img src="https://www.yiiframework.com/files/logo/yii.png" width="400" alt="Yii Framework" />
-    </a>
-    <h1 align="center">Yii Framework Demo Project</h1>
-    <br>
-</p>
-
-[Yii Framework] is a modern framework designed to be a solid foundation for your PHP application.
+[Chiron Framework] is a light framework designed to allow developpers to quickly start a new console or web application.
 
 <img src="https://user-images.githubusercontent.com/796136/67560465-9d827780-f723-11e9-91ac-9b2fafb027f2.png" height="135px" alt="Spiral Framework" align="left"/>
 
-It's intended to show and test all Yii features.
+This repository contain an App Skeletton intended to show the basic Chiron features. Your first step to build amazing projects !
 
 [![Latest Stable Version](https://poser.pugx.org/yiisoft/yii-demo/v/stable.png)](https://packagist.org/packages/yiisoft/yii-demo)
 [![Total Downloads](https://poser.pugx.org/yiisoft/yii-demo/downloads.png)](https://packagist.org/packages/yiisoft/yii-demo)
 [![Build Status](https://travis-ci.com/yiisoft/yii-demo.svg?branch=master)](https://travis-ci.com/yiisoft/yii-demo)
 
-## Installation
+## Requirements
 
-1. Clone this repository.
-2. Configure `config/params.php`. You can skip this step.
-3. Run `composer install`in your directory root folder.
-4. Run `./vendor/bin/yii serve` or start your web-server setting up `public` directory as webroot.
-5. Go to index page. Cycle ORM will create tables, indexes and relations automatically in the configured DB.
-  If you want to disable this behavior then comment out line with `Generator\SyncTables::class` in the `config/params.php`.
-  In this case you should create migrations to sync changes of entities with DB.
- 6. Run `./vendor/bin/yii fixture/add 20` to create some random data.
-
-## Console
-
-Console works out of the box and could be executed with `./vendor/bin/yii`.
-
-Some commands:
-
-```bash
-user/create <login> <password>
-fixture/add [count]
-```
-
-In order to register your own commands, add them to `console/params.php`, `console` → `commands` section.
-
-## Web application
-
-In order to run web application either built-in web server could be used by running `./vendor/bin/yii serve` or a
-real web server could be pointed to `/public/index.php`.
-
-More routes could be added by editing `src/Factory/AppRouterFactory`.
+Make sure that your web server is configured with following PHP version and extensions:
+* PHP >= 7.2
+* *intl* PHP Extension
+* *mbstring* PHP Extension
 
 ## Installation
 
-```bash
-composer create-project spiral/app
-```
+If you do not have [Composer](http://getcomposer.org/), you may install it by following the instructions at [getcomposer.org](http://getcomposer.org/doc/00-intro.md).
 
-> Application server will be downloaded automatically (`php-curl` and `php-zip` required).
-
-Once the application is installed you can ensure that it was configured properly by executing:
+You can then install this project template using the following command:
 
 ```bash
-$ php ./app.php configure
+$ composer create-project chiron/app [my-app-name]
 ```
+>Replace [my-app-name] with the desired directory name for your new application.
 
-To start application server execute:
+You can launch a developement web server to quickly test you application.
 
 ```bash
-$ ./spiral serve -v -d
+$ php -S localhost:8080 -t public/
 ```
+or
+```bash
+$ bash bin/chiron serve
+```
+>Now you should be able to access the application through the URL printed to console.
 
-On Windows:
+## Cloning
+
+Make sure to properly configure project if you cloned the existing repository.
 
 ```bash
-$ spiral.exe serve -v -d
+$ copy .env.example .env
+$ bin/chiron encrypt:key -m .env
+$ bin/chiron package:discover
 ```
 
-Application will be available on `http://localhost:8080`.
+## Directory structure
 
-> Read more about application server configuration [here](https://roadrunner.dev/docs).
+The application template has the following structure:
 
-## Server Requirements
-
-Make sure that your server is configured with following PHP version and extensions:
-* PHP 7.2+, 64bit
-* *mb-string* extension
-* PDO Extension with desired database drivers
+```
+config/             Configuration files.
+docs/               Documentation.
+public/             Files publically accessible from the Internet.
+    assets/         Published assets.
+    index.php       Entry script.
+resources/          Application resources.
+    assets/         Asset bundle resources.
+    layout/         Layout view templates.
+    view/           View templates.
+runtime/            Files generated during runtime.
+src/                Application source code.
+    Asset/          Asset bundle definitions.
+    Controller/     Web controller classes.
+    Provider/       Providers that take configuration and configure services.
+tests/              A set of Codeception tests for the application.
+vendor/             Installed Composer packages.
+```
 
 ## Testing
 
@@ -91,31 +77,11 @@ To test an application:
 ```bash
 $ ./vendor/bin/phpunit
 ```
-
-## Cloning
-
-Make sure to properly configure project if you cloned the existing repository.
-
-```bash
-$ copy .env.sample .env
-$ php app.php encrypt:key -m .env
-$ php app.php configure -vv
-$ ./vendor/bin/spiral get
-```
-
-## Server
-
-You can launch a php server to quickly test you application.
-
-```bash
-$ php -S localhost:8080 -t public/
-```
 or
-
 ```bash
-$ bash bin/chiron serve
+$ composer phpunit
 ```
 
 ## License
 
-MIT License (MIT). Please see [`LICENSE`](./LICENSE) for more information. Maintained by [Spiral Scout](https://spiralscout.com).
+The Chiron framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
