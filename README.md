@@ -26,18 +26,6 @@ $ composer create-project chiron/app [my-app-name]
 ```
 >Replace [my-app-name] with the desired directory name for your new application.
 
-
-You can launch a development web server to quickly test you application.
-
-```bash
-$ php -S localhost:8080 -t public/
-```
-or
-```bash
-$ bin/chiron serve
-```
->Now you should be able to access the application through the URL printed in the console.
-
 ## Cloning
 
 >This section applies only if you cloned this repo with `git clone`, not when you installed Chiron with `composer create-project ...`.
@@ -49,6 +37,19 @@ $ copy .env.example .env
 $ bin/chiron encrypt:key -m .env
 $ bin/chiron package:discover
 ```
+
+## Web Server
+
+You can launch a development web server to quickly test you application.
+
+```bash
+$ php -S localhost:8080 -t public/
+```
+or
+```bash
+$ bin/chiron serve
+```
+>Now you should be able to access the application through the URL printed in the console.
 
 ## Directory structure
 
