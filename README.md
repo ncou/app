@@ -40,6 +40,8 @@ $ bin/chiron serve
 
 ## Cloning
 
+>This section applies only if you cloned this repo with `git clone`, not when you installed Chiron with `composer create-project ...`.
+
 Make sure to properly configure project if you cloned the existing repository.
 
 ```bash
