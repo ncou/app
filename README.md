@@ -52,23 +52,23 @@ $ bin/chiron package:discover
 
 The application template has the following structure:
 
-```
-config/                                   #Configuration files.
-docs/                                     #Documentation.
-public/                                   #Files publically accessible from the Internet.
-    assets/                               #Published assets.
-    index.php                             #Entry script.
-resources/                                #Application resources.
-    assets/                               #Asset bundle resources.
-    layout/                               #Layout view templates.
-    view/                                 #View templates.
-runtime/                                  #Files generated during runtime.
-src/                                      #Application source code.
-    Asset/                                #Asset bundle definitions.
-    Controller/                           #Web controller classes.
-    Provider/                             #Providers that take configuration and configure services.
-tests/                                    #A set of Codeception tests for the application.
-vendor/                                   #Installed Composer packages.
+```bash
+config/                       #Configuration files.
+docs/                         #Documentation.
+public/                       #Files publically accessible from the Internet.
+    assets/                   #Published assets.
+    index.php                 #Entry script.
+resources/                    #Application resources.
+    assets/                   #Asset bundle resources.
+    layout/                   #Layout view templates.
+    view/                     #View templates.
+runtime/                      #Files generated during runtime.
+src/                          #Application source code.
+    Asset/                    #Asset bundle definitions.
+    Controller/               #Web controller classes.
+    Provider/                 #Providers that take configuration and configure services.
+tests/                        #A set of Codeception tests for the application.
+vendor/                       #Installed Composer packages.
 ```
 
 ## Testing
