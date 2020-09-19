@@ -14,7 +14,8 @@
         "php": "^7.2",
         "vlucas/phpdotenv": "^5.0",
         "nyholm/psr7": "^1.2",
-        "chiron/chiron": "^3.8",
+        "chiron/chiron": "^3.9",
+        "chiron/http": "^1.1",
         "chiron/views": "^1.0",
         "chiron/fastroute-bridge": "^1.0",
         "filp/whoops": "^2.7"
