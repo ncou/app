@@ -40,7 +40,7 @@
         ],
         "post-create-project-cmd": [
             "php -r \"copy('.env.example', '.env');\"",
-            "bash bin/chiron encrypt:key -m .env"
+            "bash bin/chiron key:update -v --mount .env"
         ],
         "phpunit": "phpunit --colors=always"
     }
