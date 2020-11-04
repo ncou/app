@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Bootloader;
 
 use Chiron\Bootload\AbstractBootloader;
@@ -12,6 +14,4 @@ class AddMiddlewareBootloader extends AbstractBootloader
     {
         $middlewares->addMiddleware(XClacksOverheadMiddleware::class);
     }
-
 }
-
