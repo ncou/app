@@ -16,6 +16,7 @@
         "nyholm/psr7": "^1.2",
         "chiron/chiron": "^3.9",
         "chiron/http": "^1.1",
+        "chiron/response-creator": "^1.0",
         "chiron/views": "^1.0",
         "chiron/fastroute-bridge": "^1.0",
         "filp/whoops": "^2.7"

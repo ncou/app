@@ -9,7 +9,7 @@ use Psr\Container\ContainerInterface;
 use Chiron\Views\TemplateRendererInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Chiron\Http\Helper\ResponseCreator;
+use Chiron\ResponseCreator\ResponseCreator;
 
 final class HomeController
 {
