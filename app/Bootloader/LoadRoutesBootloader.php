@@ -8,7 +8,7 @@ use Chiron\Http\Response\HtmlResponse;
 use Psr\Container\ContainerInterface;
 use Chiron\Views\TemplateRendererInterface;
 use Chiron\Container\Container;
-use Chiron\Bootload\AbstractBootloader;
+use Chiron\Core\Container\Bootloader\AbstractBootloader;
 use LogicException;
 use SplFileInfo;
 use Symfony\Component\Finder\Finder;
@@ -33,7 +33,6 @@ use Chiron\Routing\RouteCollection;
 use Chiron\Container\BindingInterface;
 
 use Chiron\Facade\Routing;
-use Chiron\Facade\Target;
 
 class LoadRoutesBootloader extends AbstractBootloader
 {
@@ -65,7 +64,7 @@ class LoadRoutesBootloader extends AbstractBootloader
         //Routing::get('/{action}')->to(Target::action('\Controllers\MainController', 'index'))->name('home');
 
         //Routing::get('/{action}')->to(Target::callback([\App\Controller\HomeController::class, 'index']))->name('home');
-        $routes->map('/{action}')->method('GET')->to(Target::callback([\App\Controller\HomeController::class, 'index']))->name('home');
+        $routes->map('/{action}')->method('GET')->to([\App\Controller\HomeController::class, 'index'])->name('home');
 
         //$routing->view('/test', 'test');
     }
