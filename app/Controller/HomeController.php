@@ -1,15 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 //use Chiron\Http\Psr\Response;
 //use Chiron\Http\Response\HtmlResponse;
 
-use Psr\Container\ContainerInterface;
-use Chiron\Views\TemplateRendererInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\ResponseInterface;
 use Chiron\ResponseCreator\ResponseCreator;
+use Chiron\Views\TemplateRendererInterface;
+use Psr\Http\Message\ResponseInterface;
 
 final class HomeController
 {
@@ -23,7 +23,7 @@ final class HomeController
 
     public function index(ResponseCreator $responder): ResponseInterface
     {
-        $name = "FOOBAR";
+        $name = 'FOOBAR';
 
         $this->view->addAttribute('name', $name);
 
@@ -32,4 +32,3 @@ final class HomeController
         return $responder->html($content);
     }
 }
-
