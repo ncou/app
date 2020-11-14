@@ -4,20 +4,19 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use Chiron\Boot\Directories;
 use Chiron\Application;
-use Chiron\Http\Http;
+use Chiron\Boot\Directories;
+use Chiron\Console\Console;
 use Chiron\Filesystem\Filesystem;
-use PHPUnit\Framework\TestCase as BaseTestCase;
+use Chiron\Http\Http;
 use Nyholm\Psr7\ServerRequest;
+use PHPUnit\Framework\TestCase as BaseTestCase;
 use Psr\Http\Message\ServerRequestInterface;
-
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\OutputInterface;
-use Chiron\Console\Console;
 
-abstract class TestCase extends BaseTestCase
+abstract class AbstractTestCase extends BaseTestCase
 {
     /** @var Application */
     protected $app;
@@ -84,7 +83,7 @@ abstract class TestCase extends BaseTestCase
         return $output->fetch();
     }
 
-    protected function runCommandDebug(string $command, array $args = [], OutputInterface $output = null): string
+    protected function runCommandDebug(string $command, array $args = [], ?OutputInterface $output = null): string
     {
         array_unshift($args, $command);
 
@@ -97,7 +96,7 @@ abstract class TestCase extends BaseTestCase
         return $output->fetch();
     }
 
-    protected function runCommandVeryVerbose(string $command, array $args = [], OutputInterface $output = null): string
+    protected function runCommandVeryVerbose(string $command, array $args = [], ?OutputInterface $output = null): string
     {
         array_unshift($args, $command);
 

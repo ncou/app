@@ -4,14 +4,7 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use Chiron\Boot\Directories;
-use Chiron\Application;
-use Chiron\Http\Http;
-use Chiron\Filesystem\Filesystem;
-use Nyholm\Psr7\ServerRequest;
-use Psr\Http\Message\ServerRequestInterface;
-
-class HttpTest extends TestCase
+class HttpTest extends AbstractTestCase
 {
     public function testAppHttp()
     {
