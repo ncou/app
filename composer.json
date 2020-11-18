@@ -19,6 +19,7 @@
         "chiron/response-creator": "^1.0",
         "chiron/views": "^1.0",
         "chiron/fastroute-bridge": "^1.0",
+        "chiron/sapi": "^1.0",
         "filp/whoops": "^2.7"
     },
     "require-dev": {

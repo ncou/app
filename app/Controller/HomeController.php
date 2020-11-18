@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-//use Chiron\Http\Psr\Response;
-//use Chiron\Http\Response\HtmlResponse;
-
 use Chiron\ResponseCreator\ResponseCreator;
 use Chiron\Views\TemplateRendererInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -14,20 +11,20 @@ use Psr\Http\Message\ResponseInterface;
 final class HomeController
 {
     /** @var TemplateRendererInterface */
-    private $view;
+    private $template;
 
-    public function __construct(TemplateRendererInterface $view)
+    public function __construct(TemplateRendererInterface $template)
     {
-        $this->view = $view;
+        $this->template = $template;
     }
 
     public function index(ResponseCreator $responder): ResponseInterface
     {
         $name = 'FOOBAR';
 
-        $this->view->addAttribute('name', $name);
+        $this->template->addAttribute('name', $name);
 
-        $content = $this->view->render('hello');
+        $content = $this->template->render('hello');
 
         return $responder->html($content);
     }
