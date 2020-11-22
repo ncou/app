@@ -41,7 +41,7 @@
             "bash bin/chiron package:discover"
         ],
         "post-create-project-cmd": [
-            "bash bin/chiron dotenv:copy",
+            "bash bin/chiron dotenv:copy -d .env",
             "bash bin/chiron dotenv:key -m .env"
         ],
         "phpunit": "phpunit --colors=always",
