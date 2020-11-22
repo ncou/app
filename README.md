@@ -33,8 +33,11 @@ $ composer create-project chiron/app [my-app-name]
 Make sure to properly configure your app project after cloning this repository.
 
 ```bash
-$ copy .env.example .env
-$ bin/chiron encrypt:key -m .env
+# Create the .env file at the root path
+$ bin/chiron dotenv:copy -d .env
+# Update the security key in .env file
+$ bin/chiron dotenv:key -m .env
+# Auto-discover the module bootloaders
 $ bin/chiron package:discover
 ```
 
