@@ -11,13 +11,13 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
-        "vlucas/phpdotenv": "^5.0",
         "nyholm/psr7": "^1.2",
         "filp/whoops": "^2.7",
         "chiron/chiron": "^3.9",
         "chiron/response-creator": "^1.0",
         "chiron/views": "^1.0",
         "chiron/fastroute-bridge": "^1.0",
+        "chiron/dotenv-bridge": "^1.0",
         "chiron/sapi": "^1.0"
     },
     "require-dev": {
@@ -41,8 +41,8 @@
             "bash bin/chiron package:discover"
         ],
         "post-create-project-cmd": [
-            "php -r \"copy('.env.example', '.env');\"",
-            "bash bin/chiron key:update -m .env"
+            "bash bin/chiron dotenv:copy",
+            "bash bin/chiron dotenv:key -m .env"
         ],
         "phpunit": "phpunit --colors=always",
         "test-coverage": "phpunit --coverage-clover clover.xml",
