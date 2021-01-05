@@ -28,11 +28,13 @@ $ composer create-project chiron/app [my-app-name]
 
 ## Cloning
 
->This section applies only if you cloned this repo with `git clone`, not when you installed Chiron with `composer create-project ...`.
+>This section applies only if you cloned this repo with `git clone`, not when installed with `composer create-project ...`.
 
 Make sure to properly configure your app project after cloning this repository.
 
 ```bash
+$ composer install                      # Install the projet composer dependencies
+
 $ bin/chiron dotenv:copy -d .env        # Create the .env file at the root path
 $ bin/chiron dotenv:key -m .env         # Update the security key in .env file
 $ bin/chiron package:discover           # Auto-discover the module bootloaders
@@ -88,4 +90,4 @@ $ composer phpunit
 
 ## License
 
-The Chiron framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This package is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
