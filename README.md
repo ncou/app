@@ -1,12 +1,12 @@
 [Chiron Framework] is a light framework designed to allow developpers to quickly start a new console or web application.
 
-<img src="https://user-images.githubusercontent.com/796136/67560465-9d827780-f723-11e9-91ac-9b2fafb027f2.png" height="135px" alt="Spiral Framework" align="left"/>
+<img src="https://user-images.githubusercontent.com/16743322/103154480-d428a780-4797-11eb-8f9e-3f3a916d5f38.jpg" height="135px" alt="Chiron Framework" align="left"/>
 
 This repository contain an App Skeletton intended to show the basic Chiron features. Your first step to build amazing projects !
 
-[![Latest Stable Version](https://poser.pugx.org/yiisoft/yii-demo/v/stable.png)](https://packagist.org/packages/yiisoft/yii-demo)
-[![Total Downloads](https://poser.pugx.org/yiisoft/yii-demo/downloads.png)](https://packagist.org/packages/yiisoft/yii-demo)
-[![Build Status](https://travis-ci.com/yiisoft/yii-demo.svg?branch=master)](https://travis-ci.com/yiisoft/yii-demo)
+[![Latest Stable Version](https://poser.pugx.org/chiron/chiron/v/stable.png)](https://packagist.org/packages/chiron/chiron)
+[![Total Downloads](https://img.shields.io/packagist/dt/chiron/chiron.svg?style=flat-square)](https://packagist.org/packages/chiron/chiron/stats)
+[![Build Status](https://travis-ci.org/ncou/Chiron.svg?branch=master)](https://travis-ci.org/ncou/Chiron)
 
 ## Requirements
 
