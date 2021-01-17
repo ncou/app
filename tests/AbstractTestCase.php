@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests;
 
 use Chiron\Application;
-use Chiron\Boot\Directories;
+use Chiron\Core\Directories;
 use Chiron\Console\Console;
 use Chiron\Filesystem\Filesystem;
 use Chiron\Http\Http;
@@ -30,8 +30,8 @@ abstract class AbstractTestCase extends BaseTestCase
         $paths = [
             'root'    => $root,
             'app'     => $root . '/app',
-            'runtime' => $root . '/runtime/tests/',
-            'cache'   => $root . '/runtime/tests/cache/',
+            'runtime' => $root . '/runtime/tests/', // TODO : utiliser une truc du genre : sys_get_temp_dir() . '/chiron'
+            'cache'   => $root . '/runtime/tests/cache/', // TODO : utiliser une truc du genre : sys_get_temp_dir() . '/chiron'
         ];
 
         $fs = new Filesystem();
@@ -39,14 +39,10 @@ abstract class AbstractTestCase extends BaseTestCase
         $fs->makeDirectory($paths['cache']);
 
         $this->app = $this->makeApp($paths);
-        $this->http = $this->http();
+        $this->http = $this->http(); // TODO : il faudrait faire la même chose et stocker l'instance de la console !!!!
     }
 
-    protected function http(): Http
-    {
-        return $this->app->getContainer()->get(Http::class);
-    }
-
+    // TODO : méthode à virer si on utilise directement le répertoire temporaire du systéme d'exploitation.
     protected function tearDown(): void
     {
         $fs = new Filesystem();
@@ -58,6 +54,11 @@ abstract class AbstractTestCase extends BaseTestCase
         }
     }
 
+    protected function http(): Http
+    {
+        return $this->app->getContainer()->get(Http::class);
+    }
+
     protected function makeApp(array $paths): Application
     {
         $app = Application::init($paths, [], false);
@@ -66,43 +67,34 @@ abstract class AbstractTestCase extends BaseTestCase
         return $app;
     }
 
+    // TODO : attacher automatiquement le base_path à l'uri !!!
     protected function request(string $method, $uri, array $serverParams = []): ServerRequestInterface
     {
         return new ServerRequest($method, $uri, [], null, '1.1', $serverParams);
     }
 
-    protected function runCommand(string $command, array $args = []): string
-    {
-        array_unshift($args, $command);
-
-        $input = new ArrayInput($args);
-        $output = new BufferedOutput();
-
-        $this->console()->run($input, $output);
-
-        return $output->fetch();
-    }
-
     protected function runCommandDebug(string $command, array $args = [], ?OutputInterface $output = null): string
     {
-        array_unshift($args, $command);
-
-        $input = new ArrayInput($args);
         $output = $output ?? new BufferedOutput();
         $output->setVerbosity(BufferedOutput::VERBOSITY_VERBOSE);
 
-        $this->console()->run($input, $output);
-
-        return $output->fetch();
+        return $this->runCommand($command, $args, $output);
     }
 
     protected function runCommandVeryVerbose(string $command, array $args = [], ?OutputInterface $output = null): string
     {
+        $output = $output ?? new BufferedOutput();
+        $output->setVerbosity(BufferedOutput::VERBOSITY_DEBUG);
+
+        return $this->runCommand($command, $args, $output);
+    }
+
+    protected function runCommand(string $command, array $args = [], ?OutputInterface $output = null): string
+    {
         array_unshift($args, $command);
 
         $input = new ArrayInput($args);
         $output = $output ?? new BufferedOutput();
-        $output->setVerbosity(BufferedOutput::VERBOSITY_DEBUG);
 
         $this->console()->run($input, $output);
 
