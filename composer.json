@@ -19,7 +19,8 @@
         "chiron/views": "^1.0",
         "chiron/fastroute-bridge": "^1.0",
         "chiron/dotenv-bridge": "^1.0",
-        "chiron/sapi": "^1.0"
+        "chiron/sapi": "^1.0",
+        "chiron/webserver": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.0",
