@@ -13,12 +13,12 @@
         "php": "^7.2",
         "nyholm/psr7": "^1.2",
         "filp/whoops": "^2.7",
+        "vlucas/phpdotenv": "^5.0",
         "chiron/chiron": "^3.9",
         "chiron/logger": "^0.2",
         "chiron/response-creator": "^1.0",
         "chiron/views": "^1.0",
         "chiron/fastroute-bridge": "^1.0",
-        "chiron/dotenv-bridge": "^1.0",
         "chiron/sapi": "^1.0",
         "chiron/webserver": "^1.0"
     },
@@ -43,8 +43,8 @@
             "bash bin/chiron package:discover"
         ],
         "post-create-project-cmd": [
-            "bash bin/chiron dotenv:copy -d .env",
-            "bash bin/chiron dotenv:key -m .env"
+            "php -r \"copy('.env.sample', '.env');\"",
+            "bash bin/chiron key:update -m .env"
         ],
         "phpunit": "phpunit --colors=always",
         "test-coverage": "phpunit --coverage-clover clover.xml",
