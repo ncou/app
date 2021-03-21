@@ -38,10 +38,8 @@
         }
     },
     "scripts": {
-        "post-update-cmd": [
-            "App\\Installer::postUpdate"
-        ],
         "post-autoload-dump": [
+            "App\\Installer::postUpdate",
             "bash bin/chiron cache:clear",
             "bash bin/chiron package:discover"
         ],
