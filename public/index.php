@@ -12,4 +12,4 @@ Chiron\Debug\Debug::enable();
 $paths = require $currentDir . '/bootstrap/paths.php';
 $app = Chiron\Application::init($paths);
 
-exit($app->run());
+exit($app->start());
