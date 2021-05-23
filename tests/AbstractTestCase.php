@@ -35,8 +35,8 @@ abstract class AbstractTestCase extends BaseTestCase
         ];
 
         $fs = new Filesystem();
-        $fs->makeDirectory($paths['runtime']);
-        $fs->makeDirectory($paths['cache']);
+        $fs->ensureDirectoryExists($paths['runtime']);
+        $fs->ensureDirectoryExists($paths['cache']);
 
         $this->app = $this->makeApp($paths);
         $this->http = $this->http(); // TODO : il faudrait faire la même chose et stocker l'instance de la console !!!!
@@ -47,7 +47,7 @@ abstract class AbstractTestCase extends BaseTestCase
     {
         $fs = new Filesystem();
 
-        $runtime = $this->app->getContainer()->get(Directories::class)->get('@runtime');
+        $runtime = $this->app->services->container->get(Directories::class)->get('@runtime');
 
         if ($fs->isDirectory($runtime)) {
             $fs->deleteDirectory($runtime);
@@ -56,13 +56,13 @@ abstract class AbstractTestCase extends BaseTestCase
 
     protected function http(): Http
     {
-        return $this->app->getContainer()->get(Http::class);
+        return $this->app->services->container->get(Http::class);
     }
 
     protected function makeApp(array $paths): Application
     {
-        $app = Application::init($paths, [], false);
-        $app->boot();
+        $app = new Application($paths, []);
+        $app->services->boot();
 
         return $app;
     }
@@ -104,6 +104,6 @@ abstract class AbstractTestCase extends BaseTestCase
 
     protected function console(): Console
     {
-        return $this->app->getContainer()->get(Console::class);
+        return $this->app->services->container->get(Console::class);
     }
 }

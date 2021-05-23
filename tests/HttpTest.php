@@ -8,7 +8,7 @@ class HttpTest extends AbstractTestCase
 {
     public function testAppHttp()
     {
-        $request = $this->request('GET', '/app/public/index'); // TODO : récupérer le base_path !!!!!
+        $request = $this->request('GET', 'http://localhost/index');
 
         $response = $this->http->handle($request);
 

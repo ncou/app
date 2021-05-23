@@ -12,7 +12,6 @@
     "require": {
         "php": "^7.2",
         "nyholm/psr7": "^1.2",
-        "filp/whoops": "^2.7",
         "vlucas/phpdotenv": "^5.0",
         "chiron/chiron": "^3.9",
         "chiron/logger": "^0.2",
