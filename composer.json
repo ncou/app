@@ -44,7 +44,8 @@
         ],
         "post-create-project-cmd": [
             "php -r \"copy('.env.sample', '.env');\"",
-            "bash bin/chiron key:update -m .env"
+            "bash bin/chiron key:update -m .env",
+            "bash bin/chiron thanks"
         ],
         "phpunit": "phpunit --colors=always",
         "test-coverage": "phpunit --coverage-clover clover.xml",
