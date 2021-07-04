@@ -43,10 +43,11 @@
             "bash bin/chiron cache:clear",
             "bash bin/chiron package:discover"
         ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.sample', '.env');\""
+        ],
         "post-create-project-cmd": [
-            "php -r \"copy('.env.sample', '.env');\"",
-            "bash bin/chiron key:update -m .env",
-            "bash bin/chiron thanks"
+            "bash bin/chiron key:update -m .env"
         ],
         "phpunit": "phpunit --colors=always",
         "test-coverage": "phpunit --coverage-clover clover.xml",
