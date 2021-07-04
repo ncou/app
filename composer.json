@@ -37,9 +37,6 @@
             "Tests\\": "tests/"
         }
     },
-    "bin": [
-        "bin/chiron"
-    ],
     "scripts": {
         "post-autoload-dump": [
             "App\\Installer::postUpdate",
