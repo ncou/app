@@ -40,14 +40,14 @@
     "scripts": {
         "post-autoload-dump": [
             "App\\Installer::postUpdate",
-            "bash bin/chiron cache:clear",
-            "bash bin/chiron package:discover"
+            "bin/chiron cache:clear",
+            "bin/chiron package:discover"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.sample', '.env');\""
         ],
         "post-create-project-cmd": [
-            "bash bin/chiron key:update -m .env"
+            "bin/chiron key:update -m .env"
         ],
         "phpunit": "phpunit --colors=always",
         "test-coverage": "phpunit --coverage-clover clover.xml",
