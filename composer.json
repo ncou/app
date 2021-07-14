@@ -38,16 +38,17 @@
         }
     },
     "scripts": {
-        "post-autoload-dump": [
-            "App\\Installer::postUpdate",
-            "bin/chiron cache:clear",
-            "bin/chiron package:discover"
-        ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.sample', '.env');\""
         ],
+        "post-autoload-dump": [
+            "App\\Installer::prepareFolders",
+            "bin/chiron cache:clear",
+            "bin/chiron package:discover"
+        ],
         "post-create-project-cmd": [
-            "bin/chiron key:update -m .env"
+            "bin/chiron key:update -m .env",
+            "App\\Installer::thanksReminder"
         ],
         "phpunit": "phpunit --colors=always",
         "test-coverage": "phpunit --coverage-clover clover.xml",
