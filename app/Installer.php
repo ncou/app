@@ -30,7 +30,7 @@ use RecursiveIteratorIterator;
 
 final class Installer
 {
-    public static function prepareFolders(Event $event = null): void
+    public static function prepareFolders(?Event $event = null): void
     {
         self::chmodRecursive('runtime', 0777);
         self::chmodRecursive('public/assets', 0777);
@@ -51,8 +51,7 @@ final class Installer
         }
     }
 
-
-    public static function thanksReminder(Event $event = null): void
+    public static function thanksReminder(?Event $event = null): void
     {
         $io = $event->getIO();
 

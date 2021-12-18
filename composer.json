@@ -10,8 +10,8 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.2",
-        "nyholm/psr7": "^1.2",
+        "php": "^8.0|^8.1",
+        "nyholm/psr7": "^1.4",
         "vlucas/phpdotenv": "^5.0",
         "chiron/chiron": "^3.9",
         "chiron/logger": "^0.2",
@@ -23,8 +23,9 @@
         "chiron/debug": "^1.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.0",
+        "phpunit/phpunit": "^9.5",
         "phpstan/phpstan": "^0.12.0",
+        "phpstan/phpstan-phpunit": "^0.12",
         "chiron/coding-standard": "^3.0"
     },
     "autoload": {

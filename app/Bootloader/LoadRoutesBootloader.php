@@ -16,6 +16,6 @@ class LoadRoutesBootloader extends AbstractBootloader
 {
     public function boot(Map $map)
     {
-        $map->map('/{action}')->method('GET')->to([HomeController::class, 'index'])->name('home'); // TODO : utiliser ->get() au lien me ->map() et virer la commande ->method('GET')
+        $map->route('/{action}')->method('GET')->to([HomeController::class, 'index'])->name('home'); // TODO : utiliser ->get() au lien me ->map() et virer la commande ->method('GET')
     }
 }
