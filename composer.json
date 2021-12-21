@@ -44,11 +44,11 @@
         ],
         "post-autoload-dump": [
             "App\\Installer::prepareFolders",
-            "bin/chiron cache:clear",
-            "bin/chiron package:discover"
+            "bash bin/chiron cache:clear",
+            "bash bin/chiron package:discover"
         ],
         "post-create-project-cmd": [
-            "bin/chiron key:update -m .env",
+            "bash bin/chiron key:update -m .env",
             "App\\Installer::thanksReminder"
         ],
         "phpunit": "phpunit --colors=always",
