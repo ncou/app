@@ -14,8 +14,6 @@ jobs:
 
             - name: Normalize composer.json
               uses: docker://ergebnis/composer-normalize-action
-              with:
-                args: "--dry-run"
 
             - name: Commit changes
               uses: stefanzweifel/git-auto-commit-action@v4
