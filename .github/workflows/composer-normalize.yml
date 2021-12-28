@@ -18,6 +18,6 @@ jobs:
                 args: "--dry-run"
 
             - name: Commit changes
-            - uses: stefanzweifel/git-auto-commit-action@v4.0.0
+              uses: stefanzweifel/git-auto-commit-action@v4
               with:
                   commit_message: normalize composer.json
