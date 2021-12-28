@@ -1,7 +1,7 @@
 {
     "name": "chiron/app",
     "type": "project",
-    "description": "Chiron Basic Application",
+    "description": "Chiron Application Example",
     "homepage": "https://github.com/ncou/app",
     "keywords": [
         "chiron",
