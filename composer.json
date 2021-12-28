@@ -2,7 +2,6 @@
     "name": "chiron/app",
     "type": "project",
     "description": "Chiron Application Example",
-    "homepage": "https://github.com/ncou/app",
     "keywords": [
         "chiron",
         "framework",
@@ -10,25 +9,26 @@
         "application",
         "app"
     ],
+    "homepage": "https://github.com/ncou/app",
     "license": "MIT",
     "require": {
-        "php": "^8.0|^8.1",
-        "nyholm/psr7": "^1.4",
-        "vlucas/phpdotenv": "^5.0",
+        "php": "^8.0 || ^8.1",
         "chiron/chiron": "^3.9",
+        "chiron/debug": "^1.0",
+        "chiron/fastroute-bridge": "^1.0",
         "chiron/logger": "^0.2",
         "chiron/response-creator": "^1.0",
-        "chiron/views": "^1.0",
-        "chiron/fastroute-bridge": "^1.0",
         "chiron/sapi": "^1.0",
+        "chiron/views": "^1.0",
         "chiron/webserver": "^1.0",
-        "chiron/debug": "^1.0"
+        "nyholm/psr7": "^1.4",
+        "vlucas/phpdotenv": "^5.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.5",
+        "chiron/coding-standard": "^3.0",
         "phpstan/phpstan": "^0.12.0",
         "phpstan/phpstan-phpunit": "^0.12",
-        "chiron/coding-standard": "^3.0"
+        "phpunit/phpunit": "^9.5"
     },
     "autoload": {
         "psr-4": {
@@ -41,22 +41,22 @@
         }
     },
     "scripts": {
-        "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.sample', '.env');\""
-        ],
         "post-autoload-dump": [
             "App\\Installer::prepareFolders",
             "bash bin/chiron cache:clear",
             "bash bin/chiron package:discover"
         ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.sample', '.env');\""
+        ],
         "post-create-project-cmd": [
             "bash bin/chiron key:update -m .env",
             "App\\Installer::thanksReminder"
         ],
-        "phpunit": "phpunit --colors=always",
-        "test-coverage": "phpunit --coverage-clover clover.xml",
-        "phpstan": "phpstan analyse app --level=max",
         "check-style": "phpcs app tests",
-        "fix-style": "phpcbf app tests"
+        "fix-style": "phpcbf app tests",
+        "phpstan": "phpstan analyse app --level=max",
+        "phpunit": "phpunit --colors=always",
+        "test-coverage": "phpunit --coverage-clover clover.xml"
     }
 }
