@@ -25,10 +25,7 @@
         "vlucas/phpdotenv": "^5.0"
     },
     "require-dev": {
-        "chiron/coding-standard": "^3.0",
-        "phpstan/phpstan": "^0.12.0",
-        "phpstan/phpstan-phpunit": "^0.12",
-        "phpunit/phpunit": "^9.5"
+        "chiron/devtools": "dev-master@dev"
     },
     "autoload": {
         "psr-4": {
@@ -58,5 +55,7 @@
         "phpstan": "phpstan analyse app --level=max",
         "phpunit": "phpunit --colors=always",
         "test-coverage": "phpunit --coverage-clover clover.xml"
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
