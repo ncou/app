@@ -14,7 +14,7 @@
         ]
     },
     "pre-push": {
-        "enabled": true,
+        "enabled": false,
         "actions": [
             {
                 "action": "composer test"
@@ -22,7 +22,7 @@
         ]
     },
     "pre-commit": {
-        "enabled": true,
+        "enabled": false,
         "actions": [
             {
                 "action": "composer validate",
