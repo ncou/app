@@ -3,7 +3,7 @@ name: Normalize composer.json
 on:
   push:
     paths:
-        - "composer.json"
+      - "composer.json"
 
 jobs:
   normalize:
@@ -18,4 +18,4 @@ jobs:
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-            commit_message: normalize composer.json
+          commit_message: normalize composer.json
