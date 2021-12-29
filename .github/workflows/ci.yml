@@ -63,7 +63,7 @@ jobs:
 
   coding-standard:
     name: Coding Standard
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -83,7 +83,7 @@ jobs:
 
   static-analysis:
     name: Static Analysis
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -95,8 +95,8 @@ jobs:
           extensions: mbstring, intl
           coverage: none
 
-      - name: Composer install
-        run: composer install
+      - name: Install dependencies
+        uses: ramsey/composer-install@v2
 
       - name: Run phpstan
         run: composer phpstan
