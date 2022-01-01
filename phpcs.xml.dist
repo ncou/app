@@ -17,7 +17,7 @@
     <!-- Show sniff codes in all reports -->
     <arg value="s"/>
 
-    <file>src/</file>
+    <file>app/</file>
     <file>tests/</file>
 
     <!-- Load the ruleset.xml file from this folder -->

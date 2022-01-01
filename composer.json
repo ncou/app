@@ -25,7 +25,7 @@
         "vlucas/phpdotenv": "^5.0"
     },
     "require-dev": {
-        "chiron/devtools": "dev-master@dev"
+        "chiron/devtools": "^1.0"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -40,6 +40,14 @@
         }
     },
     "config": {
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpstan/extension-installer": true,
+            "ergebnis/composer-normalize": true,
+            "captainhook/plugin-composer": true,
+            "chiron/devtools": true
+        },
         "sort-packages": true
     },
     "extra": {
