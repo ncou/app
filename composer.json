@@ -41,12 +41,12 @@
     },
     "config": {
         "allow-plugins": {
+            "captainhook/plugin-composer": true,
+            "chiron/devtools": true,
             "composer/package-versions-deprecated": true,
             "dealerdirect/phpcodesniffer-composer-installer": true,
-            "phpstan/extension-installer": true,
             "ergebnis/composer-normalize": true,
-            "captainhook/plugin-composer": true,
-            "chiron/devtools": true
+            "phpstan/extension-installer": true
         },
         "sort-packages": true
     },
@@ -62,16 +62,11 @@
         }
     },
     "scripts": {
-        "post-autoload-dump": [
-            "App\\Installer::prepareFolders",
-            "bash bin/chiron cache:clear",
-            "bash bin/chiron package:discover"
-        ],
-        "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.sample', '.env');\""
+        "post-update-cmd": [
+            "App\\Installer::initProject"
         ],
         "post-create-project-cmd": [
-            "bash bin/chiron key:update -m .env",
+            "App\\Installer::initProject",
             "App\\Installer::thanksReminder"
         ],
         "check-style": "phpcs app tests",
