@@ -1,8 +1,7 @@
 {
     "name": "chiron/app",
-    "description": "Chiron Application Example",
-    "license": "MIT",
     "type": "project",
+    "description": "Chiron Application Example",
     "keywords": [
         "chiron",
         "framework",
@@ -11,6 +10,7 @@
         "app"
     ],
     "homepage": "https://github.com/ncou/app",
+    "license": "MIT",
     "require": {
         "php": "^8.0 || ^8.1",
         "chiron/chiron": "^3.9",
@@ -26,18 +26,6 @@
     },
     "require-dev": {
         "chiron/devtools": "^1.0"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "autoload": {
-        "psr-4": {
-            "App\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests/"
-        }
     },
     "config": {
         "allow-plugins": {
@@ -61,6 +49,18 @@
             "configFile": "conventional-commits.json"
         }
     },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "scripts": {
         "post-install-cmd": [
             "@init-app"
