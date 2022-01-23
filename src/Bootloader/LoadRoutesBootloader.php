@@ -14,7 +14,7 @@ use Chiron\Routing\Map;
 
 class LoadRoutesBootloader extends AbstractBootloader
 {
-    public function boot(Map $map)
+    public function boot(Map $map): void
     {
         $map->route('/{action}')->method('GET')->to([HomeController::class, 'index'])->name('home'); // TODO : utiliser ->get() au lien me ->map() et virer la commande ->method('GET')
     }

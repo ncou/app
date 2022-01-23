@@ -3,11 +3,11 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
        totallyTyped="true"
-       cacheDirectory="./build/cache/psalm"
+       cacheDirectory="./.build/cache/psalm"
        errorBaseline="./psalm-baseline.xml">
 
     <projectFiles>
-        <directory name="./app"/>
+        <directory name="./src"/>
         <ignoreFiles>
             <directory name="./tests"/>
             <directory name="./vendor"/>
