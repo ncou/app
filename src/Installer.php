@@ -129,8 +129,8 @@ final class Installer
             $setFolderPermissions = $io->askAndValidate(
                 '<info>Set Folder Permissions ? (Default to Y)</info> [<comment>Y,n</comment>]? ',
                 $validator,
-                10,
-                'Y'
+                attempts: 10,
+                default: 'Y'
             );
 
             if (in_array($setFolderPermissions, ['n', 'N'])) {
@@ -142,7 +142,7 @@ final class Installer
         $changePerms = function ($path) use ($io) {
             $currentPerms = fileperms($path) & 0777;
             $worldWritable = $currentPerms | 0007;
-            if ($worldWritable == $currentPerms) {
+            if ($worldWritable === $currentPerms) {
                 return;
             }
 
@@ -159,7 +159,7 @@ final class Installer
             foreach ($files as $file) {
                 $path = $dir . $file;
 
-                if (!is_dir($path)) {
+                if (! is_dir($path)) {
                     continue;
                 }
 
@@ -202,7 +202,7 @@ final class Installer
 
         $content = str_replace('__KEY__', $newKey, $content, $count);
 
-        if ($count == 0) {
+        if ($count === 0) {
             $io->write('No security key placeholder to replace.');
 
             return;
