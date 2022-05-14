@@ -31,6 +31,8 @@ class HttpTest extends AbstractTestCase
             ['en', 'en', 'A man is not dead while his name is still spoken.'],
             ['de', 'en', 'A man is not dead while his name is still spoken.'],
             ['fr', 'fr', 'Un homme n\'est pas mort tant que son nom est encore prononcé.'],
+            ['fr;q=0.9', 'fr', 'Un homme n\'est pas mort tant que son nom est encore prononcé.'],
+            ['de;q=0.7, fr;q=0.9, *;q=0.5', 'fr', 'Un homme n\'est pas mort tant que son nom est encore prononcé.'],
         ];
     }
 

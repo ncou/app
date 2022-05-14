@@ -28,7 +28,7 @@ use Chiron\Dev\Tools\AbstractTestCase as DevtoolsTestCase;
 //https://github.com/cakephp/cakephp/blob/5.x/src/TestSuite/StringCompareTrait.php
 // TODO : vérifier quand même que ces nouveaux assert ne sont pas des doublons de ce qui existe déjà dans PHPUNIT : https://github.com/sebastianbergmann/phpunit/blob/master/src/Framework/Assert.php
 
-// TODO : initialiser une propriété de classe "public const ENV = []" pour overwriter les valeurs d'environement lorsuqo'n fera un extends de cette classe.
+// TODO : initialiser une propriété de classe "public const ENV = []" pour overwriter les valeurs d'environement lorsqu'on fera un extends de cette classe.
 //https://github.com/spiral/testing/blob/fd6373159193602db8f012368e4e4734f8c93af1/src/TestCase.php#L27
 //https://github.com/spiral/testing/blob/fd6373159193602db8f012368e4e4734f8c93af1/src/TestCase.php#L119
 

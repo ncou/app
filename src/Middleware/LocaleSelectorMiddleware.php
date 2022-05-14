@@ -74,10 +74,10 @@ class LocaleSelectorMiddleware implements MiddlewareInterface
         foreach (explode(',', $header) as $value) {
             $length = strpos($value, ';');
             if ($length !== false) {
-                yield substr($value, 0, $length);
+                yield trim(substr($value, 0, $length));
+            } else {
+                yield $value;
             }
-
-            yield $value;
         }
     }
 }
