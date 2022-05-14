@@ -1,15 +1,14 @@
 <?php
 
-declare(strict_types=1);
+// The full path to the directory which holds "src", WITHOUT a trailing directory separator.
+$rootPath = dirname(__DIR__);
 
-$currentDir = PHP_SAPI === 'cli' ? getcwd() : realpath(getcwd().'/../');
-
-require $currentDir . '/bootstrap/requirements.php';
-require $currentDir . '/vendor/autoload.php';
+require $rootPath . '/bootstrap/requirements.php';
+require $rootPath . '/vendor/autoload.php';
 
 Chiron\Debug\Debugger::enable();
 
-$paths = require $currentDir . '/bootstrap/paths.php';
+$paths = require $rootPath . '/bootstrap/paths.php';
 $app = new Chiron\Application($paths);
 
 exit($app->start());

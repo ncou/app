@@ -78,7 +78,7 @@
         "enabled": true,
         "actions": [
             {
-                "action": "composer install --ansi",
+                "action": "composer install --ansi --no-interaction",
                 "conditions": [
                     {
                         "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileChanged\\Any",
@@ -92,7 +92,7 @@
         "enabled": true,
         "actions": [
             {
-                "action": "composer install --ansi",
+                "action": "composer install --ansi --no-interaction",
                 "conditions": [
                     {
                         "exec": "\\CaptainHook\\App\\Hook\\Condition\\FileChanged\\Any",

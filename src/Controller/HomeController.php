@@ -5,27 +5,31 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Chiron\ResponseCreator\ResponseCreator;
-use Chiron\Views\TemplateRendererInterface;
+use Chiron\View\ViewManager;
 use Psr\Http\Message\ResponseInterface;
+use Chiron\Translator\TranslatorInterface;
+use Chiron\ResponseCreator\Traits\ResponseCapableInterface;
+use Chiron\ResponseCreator\Traits\ResponseCapableTrait;
 
-final class HomeController
+final class HomeController implements ResponseCapableInterface
 {
-    /** @var TemplateRendererInterface */
-    private $template;
+    use ResponseCapableTrait;
 
-    public function __construct(TemplateRendererInterface $template)
+    public function index(ViewManager $views, TranslatorInterface $translator): ResponseInterface
     {
-        $this->template = $template;
-    }
+        $view = $views->get('home');
 
-    public function index(ResponseCreator $responder): ResponseInterface
-    {
-        $name = 'FOOBAR';
+        $view->assign('title', $translator->trans('site.title'));
+        $view->assign('quote', $translator->trans('quote.content'));
+        $view->assign('author', $translator->trans('quote.author'));
 
-        $this->template->addAttribute('name', $name);
+        // TODO : code temporaire ajouter dans le fichier de config une section "dependencies[]" avec des références vers le container.
+        // TODO : renommer la variable $result en $body
+        $result = $view->render([
+            'assetManager' => container(\Chiron\Assets\AssetManager::class),
+            'translator' => $translator,
+        ]);
 
-        $content = $this->template->render('hello');
-
-        return $responder->html($content);
+        return $this->getResponder()->html($result); // TODO : renommer getResponder() en responder.
     }
 }

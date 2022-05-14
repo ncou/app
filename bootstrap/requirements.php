@@ -8,7 +8,7 @@
  * You can remove this if you are confident that your PHP version is sufficient.
  */
 if (version_compare(PHP_VERSION, '7.2.0') < 0) {
-    die('Your PHP version must be equal or higher than 7.2.0 to use Chiron.');
+    die('Your PHP version must be equal or higher than 7.2.0 to use Chiron.'); // TODO : vérifier avec PHP8.0
 }
 
 /*

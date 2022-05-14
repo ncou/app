@@ -1,7 +1,8 @@
 {
     "name": "chiron/app",
-    "type": "project",
     "description": "Chiron Application Example",
+    "license": "MIT",
+    "type": "project",
     "keywords": [
         "chiron",
         "framework",
@@ -10,22 +11,35 @@
         "app"
     ],
     "homepage": "https://github.com/ncou/app",
-    "license": "MIT",
     "require": {
         "php": "^8.0 || ^8.1",
+        "chiron/assets": "^1.0",
         "chiron/chiron": "^3.9",
         "chiron/debug": "^1.0",
         "chiron/fastroute-bridge": "^1.0",
         "chiron/logger": "^0.2",
         "chiron/response-creator": "^1.0",
         "chiron/sapi": "^1.0",
-        "chiron/views": "^1.0",
+        "chiron/translator": "^1.0",
+        "chiron/view": "^1.0",
         "chiron/webserver": "^1.0",
         "nyholm/psr7": "^1.4",
         "vlucas/phpdotenv": "^5.0"
     },
     "require-dev": {
         "chiron/devtools": "^1.0"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
     },
     "config": {
         "allow-plugins": {
@@ -36,6 +50,7 @@
             "ergebnis/composer-normalize": true,
             "phpstan/extension-installer": true
         },
+        "process-timeout": 0,
         "sort-packages": true
     },
     "extra": {
@@ -49,31 +64,19 @@
             "configFile": "conventional-commits.json"
         }
     },
-    "autoload": {
-        "psr-4": {
-            "App\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests/"
-        }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "scripts": {
         "post-install-cmd": [
-            "@init-app"
+            "@install-app"
         ],
         "post-update-cmd": [
-            "@init-app"
+            "@install-app"
         ],
         "post-create-project-cmd": [
-            "@init-app"
+            "@install-app"
         ],
-        "init-app": [
-            "App\\Installer::initProject",
-            "App\\Installer::thanksReminder"
-        ]
+        "install-app": [
+            "App\\Installer::install"
+        ],
+        "serve": "./bin/chiron serve"
     }
 }

@@ -1,10 +1,12 @@
 <?php
 
-$rootPath = dirname(__DIR__, 1);
-
+/*
+ * This structure should only be edited if you have chiron installed in
+ * a directory layout other than the way it is distributed.
+ */
 return [
     '@root'      => $rootPath,
-    '@app'       => '@root/app/',
+    '@app'       => '@root/src/',
     '@config'    => '@root/config/',
     '@public'    => '@root/public/',
     '@resources' => '@root/resources/',

@@ -12,8 +12,26 @@ class ConsoleTest extends AbstractTestCase
 
     public function testAppConsole()
     {
-        $output = $this->runCommand('about');
+        $this->runCommand('route:list');
+        // Assert return result is successfull.
+        $this->assertExitSuccess();
+        $this->assertOutputContainsRow([
+            'Method:',
+            'Path:',
+            'Handler:',
+        ]);
+        $this->assertOutputContainsRow([
+            'GET',
+            '/',
+            'Callback()',
+        ]);
+    }
 
-        $this->assertStringContainsString('Framework', $output);
+    public function testAppConsoleError()
+    {
+        $this->runCommand('non_existing_command');
+        // Assert return result is a failure.
+        $this->assertExitFailure();
+        $this->assertErrorContains('Command "non_existing_command" is not defined.');
     }
 }

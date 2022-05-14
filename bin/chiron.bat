@@ -1,5 +1,3 @@
-@echo off
-
-SET lib=%~dp0
-
-php "%lib%/../public/index.php" %*
+@ECHO OFF
+SET DIR=%~dp0
+php "%DIR%/../public/index.php" %*

@@ -1,0 +1,106 @@
+<?php
+
+declare(strict_types=1);
+
+use App\Asset\AppAsset;
+
+/**
+ * @var App\ApplicationParameters $applicationParameters
+ * @var Yiisoft\Aliases\Aliases $aliases
+ * @var Yiisoft\Assets\AssetManager $assetManager
+ * @var string $content
+ * @var string|null $csrf
+ * @var Locale $locale
+ * @var Yiisoft\View\WebView $this
+ * @var Yiisoft\Router\CurrentRoute $currentRoute
+ */
+
+$assetManager->register(AppAsset::class);
+
+//echo var_dump($assetManager->getCssFiles());
+//echo var_dump($assetManager->getJsFiles());
+
+
+/*
+[
+    'file-1.css',
+    ['file-2.css', 'crossorigin' => 'anonymous', WebView::POSITION_BEGIN],
+]
+*/
+
+/*
+//https://github.com/yiisoft/app/blob/master/resources/views/layout/main.php
+$this->addCssFiles($assetManager->getCssFiles());
+$this->addCssStrings($assetManager->getCssStrings());
+$this->addJsFiles($assetManager->getJsFiles());
+$this->addJsStrings($assetManager->getJsStrings());
+$this->addJsVars($assetManager->getJsVars());
+*/
+
+// TODO : permettre aussi de faire un $this->addMeta() pour injecter des balises meta dans la page.
+// TODO : renommer en "assignCss()" et "assignScript()" et "assignMeta()" ???
+$this->addCssFiles($assetManager->getCssFiles());
+$this->addJsFiles($assetManager->getJsFiles());
+
+
+/*
+$data = $assetManager->getCssFiles()['/assets/4c3cb5fc/site.css'];
+$file = $data[0];
+unset($data[0]);
+$config = $data;
+
+//echo var_dump($file);
+//echo var_dump($config);
+
+
+$data2 = $assetManager->getJsFiles()['https://code.jquery.com/jquery-3.4.1.js'];
+$file2 = $data2[0];
+unset($data2[0]);
+$config2 = $data2;
+
+//echo var_dump($file2);
+//echo var_dump($config2);
+*/
+
+// TODO :
+//https://github.com/spiral/app/blob/7634b22844cadf9fd852f1623ce1cee554185eec/app/views/layout/base.dark.php#L2
+//https://github.com/yiisoft/app/blob/master/resources/views/layout/main.php#L30
+//mettre la balise <html lang="$this->translator->getLocale()">
+//Ou alors un truc du genre :
+/*<html lang="<?= Html::encode($locale->language()) ?>">
+Avec $local qui correspond à la classe php \Yiisoft\I18n\Locale::class
+*/
+
+
+//https://github.com/cakephp/app/blob/d9a98a6b43e0837a23874590c540c93114e7723d/templates/layout/default.php
+/*
+
+<?= $this->fetch('title') ?>
+
+<?= $this->fetch('meta') ?>
+<?= $this->fetch('css') ?>
+<?= $this->fetch('script') ?>
+
+<a href="<?= $this->Url->build('/') ?>"><span>Cake</span>PHP</a>
+
+<?= $this->Flash->render() ?>
+<?= $this->fetch('content') ?>
+
+*/
+
+?>
+<!DOCTYPE HTML>
+<html lang="<?= $translator->getLocale() ?>">
+    <head>
+        <title><?= $this->fetch('title') ?></title>
+        <?= $this->Html->charset() ?>
+        <?= $this->Html->meta('icon') ?>
+        <?= $this->Html->meta('viewport', 'width=device-width, initial-scale=1') ?>
+        <?= $this->fetch('css') ?>
+        <?= $this->fetch('script') ?>
+    </head>
+    <body>
+        <blockquote><?= $this->fetch('quote') ?></blockquote>
+        <cite><?= $this->fetch('author') ?></cite>
+    </body>
+</html>

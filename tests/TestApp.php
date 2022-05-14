@@ -10,7 +10,7 @@ class TestApp extends Application
 {
     public function get(string $entity): mixed
     {
-        return $this->container->get($entity);
+        return $this->services->container->get($entity);
     }
 
     public function boot(): void
