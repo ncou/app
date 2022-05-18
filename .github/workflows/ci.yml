@@ -76,8 +76,8 @@ jobs:
       - name: Install dependencies (Composer)
         uses: ramsey/composer-install@v2
 
-      - name: Run PHP CodeSniffer
-        run: composer check-style
+      - name: Run PHP CodeSniffer & PHP Parallel
+        run: composer lint
 
   static-analysis:
     name: Static Analysis
@@ -96,5 +96,5 @@ jobs:
       - name: Install dependencies (Composer)
         uses: ramsey/composer-install@v2
 
-      - name: Run phpstan
-        run: composer phpstan
+      - name: Run phpstan & psalm
+        run: composer analyze
