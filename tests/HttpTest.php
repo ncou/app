@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use Tests\Traits\InteractsWithHttpTrait;
+use Chiron\Testing\Traits\InteractsWithHttpTrait;
 
 class HttpTest extends AbstractTestCase
 {
@@ -35,7 +35,6 @@ class HttpTest extends AbstractTestCase
             ['de;q=0.7, fr;q=0.9, *;q=0.5', 'fr', 'Un homme n\'est pas mort tant que son nom est encore prononcé.'],
         ];
     }
-
 
     /**
      * Test that missing template renders 404 page in production

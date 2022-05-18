@@ -27,7 +27,8 @@
         "vlucas/phpdotenv": "^5.0"
     },
     "require-dev": {
-        "chiron/devtools": "^1.0"
+        "chiron/devtools": "^1.0",
+        "chiron/testing": "^1.0"
     },
     "config": {
         "allow-plugins": {

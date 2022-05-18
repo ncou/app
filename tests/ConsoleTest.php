@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use Tests\Traits\InteractsWithConsoleTrait;
+use Chiron\Testing\Traits\InteractsWithConsoleTrait;
 
 class ConsoleTest extends AbstractTestCase
 {

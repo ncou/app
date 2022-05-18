@@ -17,6 +17,9 @@ class InstallerTest extends AbstractTestCase
     {
         $installer = $this->createInstaller();
 
+        //$this->io->shouldReceive('write')->once()->with('Created `.env` file');
+        //$installer->createDotEnvFile();
+
 /*
         $this->io
             ->expects($this->atLeast(2))
@@ -28,7 +31,7 @@ class InstallerTest extends AbstractTestCase
             */
     }
 
-    protected function createInstaller()
+    protected function createInstaller(): Installer
     {
 
         $this->io = $this->mockery(IOInterface::class);
@@ -55,5 +58,7 @@ class InstallerTest extends AbstractTestCase
             $this->io,
             $this->composer
         );
+
+        return $installer;
     }
 }

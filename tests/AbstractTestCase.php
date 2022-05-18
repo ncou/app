@@ -75,7 +75,7 @@ abstract class AbstractTestCase extends DevtoolsTestCase
 
     protected function makeApp(array $paths): Application
     {
-        $app = new TestApp($paths, []);
+        $app = new TestApp($paths, ['APP_DEBUG' => true]);
         $app->boot();
 
         return $app;

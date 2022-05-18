@@ -21,6 +21,9 @@ use Composer\Script\ScriptEvents;
 //https://github.com/mezzio/mezzio-skeleton/blob/51cf896c4d14c4b4c76427986a576c214583979b/test/MezzioInstallerTest/AddPackageTest.php#L21
 //https://github.com/mezzio/mezzio-skeleton/blob/51cf896c4d14c4b4c76427986a576c214583979b/test/MezzioInstallerTest/ProjectSandboxTrait.php#L69
 //https://github.com/mezzio/mezzio-skeleton/blob/51cf896c4d14c4b4c76427986a576c214583979b/test/MezzioInstallerTest/CopyResourceTest.php#L33
+// Un bouchon pour les questions :
+//https://github.com/mezzio/mezzio-skeleton/blob/407b4869134f1a42c630c80a17956ec130c4e5d4/test/MezzioInstallerTest/RequestInstallTypeTest.php#L40
+//https://github.com/mezzio/mezzio-skeleton/blob/407b4869134f1a42c630c80a17956ec130c4e5d4/test/MezzioInstallerTest/PromptForOptionalPackagesTest.php#L75
 
 
 //https://github.com/mezzio/mezzio-skeleton/blob/3.12.x/src/MezzioInstaller/OptionalPackages.php
@@ -185,6 +188,7 @@ final class Installer
      */
     private function setFolderPermissions(): void
     {
+        // TODO : mettre cette partie interactive dans un bloc de non converture de tests. // @codeCoverageIgnoreStart   // @codeCoverageIgnoreEnd
         // ask if the permissions should be changed
         if ($this->io->isInteractive()) {
             $validator = function ($arg) {

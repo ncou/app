@@ -48,9 +48,11 @@ class LocaleSelectorMiddleware implements MiddlewareInterface
 
         try {
             foreach ($this->fetchLocales($request) as $locale) {
+                // TODO : récupérer seulement les 2 premiers caractéres de la locale au cas ou on est un truc du genre fr_FR ou fr-FR. Et faire attention si on a seulement une "*" car cela peut exister dans le header un truc genre "Accept-Language = '*;q=0.9, fr-FR'"
                 // TODO : vérifier l'utilité du "" car si on a une chaine vide le in_array retournera false donc on ne retrera pas dans le if, ce contrôle chaine vide semble redondant !!!
                 if ($locale !== '' && in_array($locale, $this->availableLocales)) {
                     $this->translator->setLocale($locale);
+
                     break;
                 }
             }
@@ -67,6 +69,7 @@ class LocaleSelectorMiddleware implements MiddlewareInterface
      *
      * @return iterable<int, string>
      */
+    // TODO : gérer le sort selon le coefficient de quality utilisé dans le header ex: 'fr;q=0.5, en;q=0.9' + renommer la méthode en extractLanguage si on retour un tableau plutot qu'un iterator, et il faudra récupérer que les 2 premiers caractéres (sauf si on est dans la cas du wildcard "*" et dans ce cas on aura pas deux caractéres, je pense qu'il faudra retourner une chaine vide dans ce cas là)
     public function fetchLocales(ServerRequestInterface $request): iterable
     {
         $header = $request->getHeaderLine('Accept-Language');
