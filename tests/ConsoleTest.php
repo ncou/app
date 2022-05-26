@@ -4,13 +4,9 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use Chiron\Testing\Traits\InteractsWithConsoleTrait;
-
 class ConsoleTest extends AbstractTestCase
 {
-    use InteractsWithConsoleTrait;
-
-    public function testAppConsole()
+    public function testAppConsole(): void
     {
         $this->runCommand('route:list');
         // Assert return result is successfull.
@@ -27,7 +23,7 @@ class ConsoleTest extends AbstractTestCase
         ]);
     }
 
-    public function testAppConsoleError()
+    public function testAppConsoleError(): void
     {
         $this->runCommand('non_existing_command');
         // Assert return result is a failure.

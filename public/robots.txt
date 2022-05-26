@@ -1,2 +1,1 @@
-User-agent: *
-Disallow:
+# see https://www.robotstxt.org/orig.html for documentation

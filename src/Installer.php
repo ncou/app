@@ -4,17 +4,13 @@ declare(strict_types=1);
 
 namespace App;
 
-use Composer\Script\Event;
-use FilesystemIterator;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
-use Composer\IO\IOInterface;
-use Chiron\Support\Random;
 use Chiron\Core\Core;
-use LogicException;
+use Chiron\Support\Random;
 use Composer\Composer;
-use Composer\Factory;
+use Composer\IO\IOInterface;
+use Composer\Script\Event;
 use Composer\Script\ScriptEvents;
+use LogicException;
 
 // TODO : ajouter des tests : exemple :
 //https://github.com/mezzio/mezzio-skeleton/blob/51cf896c4d14c4b4c76427986a576c214583979b/test/MezzioInstallerTest/OptionalPackagesTestCase.php#L168
@@ -59,6 +55,7 @@ use Composer\Script\ScriptEvents;
 // TODO : vider le cache, exemple de code avec un glob() qui liste les fichiers il suffira ensuite de faire un @unlink sur les fichiers !!!!
 //https://github.com/laravel/framework/blob/b9203fca96960ef9cd8860cb4ec99d1279353a8d/src/Illuminate/Foundation/Console/ViewClearCommand.php#L69
 //https://github.com/chubbyphp/chubbyphp-clean-directories/blob/master/src/Command/CleanDirectoriesCommand.php#L63
+//https://github.com/dimanzver/assets-deployeer/blob/master/lib/FileManager.php#L37
 
 //array_map('unlink', glob($this->cacheDir.'/*'));
 
@@ -74,7 +71,7 @@ final class Installer
     // TODO : il faudrait plutot aller chercher les infos dans le fichier bootstrap.php pour récupérer le chemin via '@runtime' et '@cache', le répertoire de log on s'en fiche ou alors il faut l'ajouter dans le fichier bootstrap + ajouter une dépendance vers chiron/logger !!!!
     private const WRITABLE_DIRS = [
         'runtime',
-        'runtime/cache'
+        'runtime/cache',
     ];
 
     private Composer $composer;
@@ -211,7 +208,7 @@ final class Installer
         }
 
         // Change the permissions on a path and output the results.
-        $changePerms = function ($path) {
+        $changePerms = function ($path): void {
             $currentPerms = fileperms($path) & 0777;
             $worldWritable = $currentPerms | 0007;
             if ($worldWritable === $currentPerms) {
@@ -227,7 +224,7 @@ final class Installer
         };
 
         // TODO : remplacer cela par une boucle sur l'Iterator : $filesystem->directories(): Traversable
-        $walker = function ($dir) use (&$walker, $changePerms) {
+        $walker = function ($dir) use (&$walker, $changePerms): void {
             $files = array_diff(scandir($dir), ['.', '..']);
             foreach ($files as $file) {
                 $path = $dir . $file;

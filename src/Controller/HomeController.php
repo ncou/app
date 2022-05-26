@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Chiron\ResponseCreator\ResponseCreator;
-use Chiron\View\ViewManager;
-use Psr\Http\Message\ResponseInterface;
-use Chiron\Translator\TranslatorInterface;
+use Chiron\Assets\AssetManager;
 use Chiron\ResponseCreator\Traits\ResponseCapableInterface;
 use Chiron\ResponseCreator\Traits\ResponseCapableTrait;
+use Chiron\Translator\TranslatorInterface;
+use Chiron\View\ViewManager;
+use Psr\Http\Message\ResponseInterface;
 
 final class HomeController implements ResponseCapableInterface
 {
@@ -26,8 +26,8 @@ final class HomeController implements ResponseCapableInterface
         // TODO : code temporaire ajouter dans le fichier de config une section "dependencies[]" avec des références vers le container.
         // TODO : renommer la variable $result en $body
         $result = $view->render([
-            'assetManager' => container(\Chiron\Assets\AssetManager::class),
-            'translator' => $translator,
+            'assetManager' => container(AssetManager::class),
+            'translator'   => $translator,
         ]);
 
         return $this->getResponder()->html($result); // TODO : renommer getResponder() en responder.

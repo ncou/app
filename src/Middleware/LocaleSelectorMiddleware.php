@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Middleware;
 
+use Chiron\Translator\TranslatorInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Chiron\Translator\TranslatorInterface;
 
 //https://github.com/contributte/translation/blob/master/src/LocalesResolvers/Header.php#L37
 //https://github.com/nette/http/blob/17314395a830257e5db7167d5cccd1e6d1183ac9/src/Http/Request.php#L274

@@ -5,9 +5,14 @@ declare(strict_types=1);
 namespace Tests;
 
 use Chiron\Application;
+use Chiron\Console\Console;
 use Chiron\Core\Directories;
+use Chiron\Dev\Tools\TestSuite\AbstractTestCase as DevtoolsTestCase;
 use Chiron\Filesystem\Filesystem;
-use Chiron\Dev\Tools\AbstractTestCase as DevtoolsTestCase;
+use Chiron\Http\Http;
+use Chiron\Testing\Traits\InteractsWithConsoleTrait;
+use Chiron\Testing\Traits\InteractsWithHttpTrait;
+use Nyholm\Psr7\ServerRequest;
 
 // TODO : améliorer l'interaction avec le HTML.
 //https://github.com/laravel/browser-kit-testing/blob/5cbb537f5685eeee47f91a95efa8dc493d97dfb5/src/Concerns/InteractsWithPages.php#L296
@@ -40,8 +45,11 @@ ex : https://github.com/illuminate/testing/blob/master/composer.json#L33
 
 abstract class AbstractTestCase extends DevtoolsTestCase
 {
+    use InteractsWithConsoleTrait;
+    use InteractsWithHttpTrait;
+
     /** @var Application */
-    protected $app;
+    protected Application $app;
 
     protected function setUp(): void
     {
@@ -79,5 +87,40 @@ abstract class AbstractTestCase extends DevtoolsTestCase
         $app->boot();
 
         return $app;
+    }
+
+    // Method needed for the interacts trait.
+    protected function console(): Console
+    {
+        return $this->app->get(Console::class);
+    }
+
+    // Method needed for the interacts trait.
+    protected function http(): Http
+    {
+        return $this->app->get(Http::class);
+    }
+
+    /**
+     * @param string                               $method       HTTP method
+     * @param string|UriInterface                  $uri          URI
+     * @param array                                $headers      Request headers
+     * @param string|resource|StreamInterface|null $body         Request body
+     * @param string                               $version      Protocol version
+     * @param array                                $serverParams Typically the $_SERVER superglobal
+     */
+    protected function handleRequest(string $method, string|UriInterface $uri, array $headers = [], $body = null, string $version = '1.1', array $serverParams = []): void
+    {
+        $request = new ServerRequest(
+            $method,
+            $uri,
+            $headers,
+            $body,
+            $version,
+            $serverParams
+        );
+
+        // Execute the interacts http trait method.
+        $this->runRequest($request);
     }
 }

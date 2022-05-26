@@ -13,7 +13,7 @@ class InstallerTest extends AbstractTestCase
     private IOInterface $io;
     private Composer $composer;
 
-    public function testInstaller()
+    public function testInstaller(): void
     {
         $installer = $this->createInstaller();
 
@@ -33,7 +33,6 @@ class InstallerTest extends AbstractTestCase
 
     protected function createInstaller(): Installer
     {
-
         $this->io = $this->mockery(IOInterface::class);
         $this->composer = $this->mockery(Composer::class);
 
@@ -51,14 +50,9 @@ class InstallerTest extends AbstractTestCase
             );
 */
 
-
-
-
-        $installer = new Installer(
+        return new Installer(
             $this->io,
             $this->composer
         );
-
-        return $installer;
     }
 }

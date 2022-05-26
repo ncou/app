@@ -4,18 +4,14 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use Chiron\Testing\Traits\InteractsWithHttpTrait;
-
 class HttpTest extends AbstractTestCase
 {
-    use InteractsWithHttpTrait;
-
     /**
      * @dataProvider dataProvider
      */
-    public function testAppHttp(string $language, string $locale, string $quote)
+    public function testAppHttp(string $language, string $locale, string $quote): void
     {
-        $this->runRequest('GET', 'http://localhost/', ['Accept-Language' => $language]); // TODO : il faudrait surement directement un uri '/' plutot que 'http://localhost/' et pour éviter une erreur lors du control du middleware AllowedHostsMiddleware il faut mettre le booléen du debug à true !!!!
+        $this->handleRequest('GET', 'http://localhost/', ['Accept-Language' => $language]); // TODO : il faudrait surement directement un uri '/' plutot que 'http://localhost/' et pour éviter une erreur lors du control du middleware AllowedHostsMiddleware il faut mettre le booléen du debug à true !!!!
 
         $this->assertResponseOk();
         $this->assertHeader('X-Clacks-Overhead', 'GNU Terry Pratchett');
