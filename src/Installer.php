@@ -101,7 +101,7 @@ final class Installer
         // Calculate project root from composer.json, if necessary
         //$this->projectRoot = $projectRoot ?? dirname($composerFile);
 
-        $this->projectRoot = rtrim($projectRoot, '/\\') . DIRECTORY_SEPARATOR;
+        $this->projectRoot = rtrim($projectRoot, '/\\') . '/';
 
         // TODO : on peut aussi faire un getcwd je pense : utiliser la classe Composer : Platform::getCwd(true)   => https://github.com/composer/composer/blob/be4b70ce79b34762acf1647e63108fdcca7f758b/src/Composer/Factory.php#L168
         // TODO : utiliser ce bout de code ???     $projectDir = \dirname(realpath(Factory::getComposerFile()));

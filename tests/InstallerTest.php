@@ -71,8 +71,8 @@ class InstallerTest extends AbstractTestCase
 
         $installer = $this->createInstaller();
 
-        $this->io->shouldReceive('write')->with('Created "' . __DIR__ . '/Fixtures/app\runtime' . '" directory');
-        $this->io->shouldReceive('write')->with('Created "' . __DIR__ . '/Fixtures/app\runtime/cache' . '" directory');
+        $this->io->shouldReceive('write')->with('Created "' . self::APPLICATION_ROOT . 'runtime' . '" directory');
+        $this->io->shouldReceive('write')->with('Created "' . self::APPLICATION_ROOT . 'runtime/cache' . '" directory');
 
         $this->assertDirectoryDoesNotExist(self::APPLICATION_ROOT . 'runtime');
         $this->assertDirectoryDoesNotExist(self::APPLICATION_ROOT . 'runtime/cache');
