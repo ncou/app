@@ -51,6 +51,7 @@ abstract class AbstractTestCase extends DevtoolsTestCase
     /** @var Application */
     protected Application $app;
 
+    // TODO : je pense que c'est plutot une méthode setUpBeforeClass cad qui doit être appellé une seule fois pour la classe de test !!!
     protected function setUp(): void
     {
         $root = dirname(__DIR__);
@@ -70,6 +71,7 @@ abstract class AbstractTestCase extends DevtoolsTestCase
     }
 
     // TODO : méthode à virer si on utilise directement le répertoire temporaire du systéme d'exploitation.
+    // TODO : je pense que c'est plutot une méthode tearDownAfterClass cad qui doit être appellé une seule fois pour la classe de test !!!
     protected function tearDown(): void
     {
         $fs = new Filesystem();
