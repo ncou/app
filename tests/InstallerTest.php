@@ -89,6 +89,8 @@ class InstallerTest extends AbstractTestCase
 
         $this->io->shouldReceive('write')->with(ltrim(Core::BANNER_LOGO, "\n"));
         $this->io->shouldReceive('write')->with('Thanks for installing this project!');
+
+        $installer->displayThanksMessage();
     }
 
     protected function createInstaller(): Installer
