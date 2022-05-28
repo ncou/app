@@ -7,11 +7,11 @@ namespace App;
 use Chiron\Core\Core;
 use Chiron\Support\Random;
 use Composer\Composer;
+use Composer\Factory;
 use Composer\IO\IOInterface;
 use Composer\Script\Event;
 use Composer\Script\ScriptEvents;
 use LogicException;
-use Composer\Factory;
 
 // TODO : ajouter des tests : exemple :
 //https://github.com/mezzio/mezzio-skeleton/blob/51cf896c4d14c4b4c76427986a576c214583979b/test/MezzioInstallerTest/OptionalPackagesTestCase.php#L168
@@ -94,7 +94,6 @@ final class Installer
         // https://github.com/symfony/thanks/blob/main/src/Thanks.php#L49
         // https://github.com/narrowspark/automatic-composer-prefetcher/blob/master/Plugin.php#L375
 
-
         // Get composer.json location
         //$composerFile = realpath(Factory::getComposerFile());
 
@@ -118,6 +117,7 @@ final class Installer
      * @param \Composer\Script\Event $event The composer event object.
      *
      * @return void
+     *
      * @codeCoverageIgnore
      */
     public static function install(Event $event): void

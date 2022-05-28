@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Tests;
 
 use App\Installer;
+use Chiron\Core\Core;
+use Chiron\Dev\Tools\TestSuite\AbstractTestCase;
 use Composer\Composer;
 use Composer\IO\IOInterface;
-use Chiron\Dev\Tools\TestSuite\AbstractTestCase;
 
 //https://github.com/mezzio/mezzio-skeleton/blob/51cf896c4d14c4b4c76427986a576c214583979b/test/MezzioInstallerTest/OptionalPackagesTestCase.php#L168
 
@@ -21,7 +22,7 @@ class InstallerTest extends AbstractTestCase
     {
         // clear the fixtures .env file if it exist.
         if (is_file(self::APPLICATION_ROOT . '.env')) {
-           unlink(self::APPLICATION_ROOT . '.env');
+            unlink(self::APPLICATION_ROOT . '.env');
         }
 
         $installer = $this->createInstaller();
@@ -41,7 +42,6 @@ class InstallerTest extends AbstractTestCase
         // call again the create dot env file, to be sure nothing is done.
         $this->io->shouldReceive('write')->never();
         $installer->createDotEnvFile();
-
     }
 
     public function testSetSecurityKey(): void
@@ -63,10 +63,10 @@ class InstallerTest extends AbstractTestCase
     {
         // clear the fixtures runtime folder if it exist.
         if (is_dir(self::APPLICATION_ROOT . 'runtime/cache')) {
-           rmdir(self::APPLICATION_ROOT . 'runtime/cache');
+            rmdir(self::APPLICATION_ROOT . 'runtime/cache');
         }
         if (is_dir(self::APPLICATION_ROOT . 'runtime')) {
-           rmdir(self::APPLICATION_ROOT . 'runtime');
+            rmdir(self::APPLICATION_ROOT . 'runtime');
         }
 
         $installer = $this->createInstaller();
@@ -81,6 +81,14 @@ class InstallerTest extends AbstractTestCase
 
         $this->assertDirectoryExists(self::APPLICATION_ROOT . 'runtime');
         $this->assertDirectoryExists(self::APPLICATION_ROOT . 'runtime/cache');
+    }
+
+    public function testDisplayThanksMessage(): void
+    {
+        $installer = $this->createInstaller();
+
+        $this->io->shouldReceive('write')->with(ltrim(Core::BANNER_LOGO, "\n"));
+        $this->io->shouldReceive('write')->with('Thanks for installing this project!');
     }
 
     protected function createInstaller(): Installer
