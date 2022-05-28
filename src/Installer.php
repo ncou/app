@@ -11,6 +11,7 @@ use Composer\IO\IOInterface;
 use Composer\Script\Event;
 use Composer\Script\ScriptEvents;
 use LogicException;
+use Composer\Factory;
 
 // TODO : ajouter des tests : exemple :
 //https://github.com/mezzio/mezzio-skeleton/blob/51cf896c4d14c4b4c76427986a576c214583979b/test/MezzioInstallerTest/OptionalPackagesTestCase.php#L168
@@ -76,9 +77,9 @@ final class Installer
 
     private Composer $composer;
     private IOInterface $io;
-    private string $rootDir; // TODO : renommer en baseDir ???? ou projectRoot ???
+    private string $projectRoot;
 
-    public function __construct(IOInterface $io, Composer $composer)
+    public function __construct(IOInterface $io, Composer $composer, string $projectRoot)
     {
         $this->io = $io;
         $this->composer = $composer;
@@ -93,22 +94,18 @@ final class Installer
         // https://github.com/symfony/thanks/blob/main/src/Thanks.php#L49
         // https://github.com/narrowspark/automatic-composer-prefetcher/blob/master/Plugin.php#L375
 
-/*
+
         // Get composer.json location
-        $composerFile = Factory::getComposerFile();
+        //$composerFile = realpath(Factory::getComposerFile());
 
         // Calculate project root from composer.json, if necessary
-        $this->projectRoot = $projectRoot ?? realpath(dirname($composerFile));
-        $this->projectRoot = rtrim($this->projectRoot, '/\\') . '/';
-*/
+        //$this->projectRoot = $projectRoot ?? dirname($composerFile);
+
+        $this->projectRoot = rtrim($projectRoot, '/\\') . DIRECTORY_SEPARATOR;
+
         // TODO : on peut aussi faire un getcwd je pense : utiliser la classe Composer : Platform::getCwd(true)   => https://github.com/composer/composer/blob/be4b70ce79b34762acf1647e63108fdcca7f758b/src/Composer/Factory.php#L168
         // TODO : utiliser ce bout de code ???     $projectDir = \dirname(realpath(Factory::getComposerFile()));
-        $this->rootDir = dirname(__DIR__) . DIRECTORY_SEPARATOR;
-
-/*
-        $this->io->write('<info>Root Dir1</info>' . $this->rootDir);
-        $this->io->write('<info>Root Dir2</info>'. getcwd());
-*/
+        //$this->projectRoot = dirname(__DIR__) . DIRECTORY_SEPARATOR;
 
         // TODO : utiliser un noralizePath dans le librairie Filesystem qui est installée avec Composer :
         //https://github.com/composer/composer/blob/854aab5f0393f39f0dc83500fee3516ccea9cc7f/src/Composer/Package/Archiver/ArchivableFilesFinder.php#L47
@@ -121,19 +118,22 @@ final class Installer
      * @param \Composer\Script\Event $event The composer event object.
      *
      * @return void
+     * @codeCoverageIgnore
      */
-    // TODO : ajouter un "* @codeCoverageIgnore" à la fin de la phpdoc ???
     public static function install(Event $event): void
     {
-        $installer = new self($event->getIO(), $event->getComposer());
+        // Calculate project root from composer.json file.
+        $root = dirname(realpath(Factory::getComposerFile()));
+
+        $installer = new self($event->getIO(), $event->getComposer(), $root);
 
         $installer->io->write('<info>Setting up application structure.</info>');
 
         // TODO : ajouter aussi une méthode pour purger le répertoire du cache !!!! eventuellement regarder la méthode $this->filesystem->emptyDirectory($path);
+        $installer->createDirectories();
+        $installer->updatePermissions();
         $installer->createDotEnvFile();
-        $installer->createWritableDirectories();
-        $installer->setFolderPermissions();
-        $installer->setSecurityKey();
+        $installer->setSecurityKey(Random::bytes());
 
         if ($event->getName() === ScriptEvents::POST_CREATE_PROJECT_CMD) {
             $installer->displayThanksMessage();
@@ -141,35 +141,19 @@ final class Installer
     }
 
     /**
-     * Create .env file if it does not exist.
+     * Create some writable directories.
      *
      * @return void
      */
-    private function createDotEnvFile(): void
-    {
-        $appLocalConfig = $this->rootDir . '.env';
-        $appLocalConfigTemplate = $this->rootDir . '.env.sample';
-
-        if (! file_exists($appLocalConfig)) {
-            copy($appLocalConfigTemplate, $appLocalConfig);
-            $this->io->write('Created `.env` file');
-        }
-    }
-
-    /**
-     * Create the `tmp` directories.
-     *
-     * @return void
-     */
-    private function createWritableDirectories(): void
+    public function createDirectories(): void
     {
         // TODO : une simple méthode $this->filesystem->ensureDirectoryExists($temporaryDir);  devrait suffire !!!
         foreach (static::WRITABLE_DIRS as $path) {
-            $path = $this->rootDir . $path;
+            $path = $this->projectRoot . $path;
 
             if (! file_exists($path)) {
                 mkdir($path);
-                $this->io->write('Created `' . $path . '` directory'); // TODO : utiliser une fonction du genre Path::normalize() pour éviter d'afficher une truc du genre D:\xxx\runtime/cache
+                $this->io->write(sprintf('Created "%s" directory', $path)); // TODO : utiliser une fonction du genre Path::normalize() pour éviter d'afficher une truc du genre D:\xxx\runtime/cache
             }
         }
     }
@@ -183,7 +167,7 @@ final class Installer
      *
      * @return void
      */
-    private function setFolderPermissions(): void
+    public function updatePermissions(): void
     {
         // TODO : mettre cette partie interactive dans un bloc de non converture de tests. // @codeCoverageIgnoreStart   // @codeCoverageIgnoreEnd
         // ask if the permissions should be changed
@@ -215,12 +199,8 @@ final class Installer
                 return;
             }
 
-            $res = chmod($path, $worldWritable);
-            if ($res) {
-                $this->io->write('Permissions set on ' . $path);
-            } else {
-                $this->io->write('Failed to set permissions on ' . $path);
-            }
+            chmod($path, $worldWritable);
+            $this->io->write('Permissions set on ' . $path);
         };
 
         // TODO : remplacer cela par une boucle sur l'Iterator : $filesystem->directories(): Traversable
@@ -238,53 +218,56 @@ final class Installer
             }
         };
 
-        $walker($this->rootDir . 'runtime');
-        $changePerms($this->rootDir . 'runtime');
-        $changePerms($this->rootDir . 'public/assets');
+        $walker($this->projectRoot . 'runtime');
+        $changePerms($this->projectRoot . 'runtime');
+        $changePerms($this->projectRoot . 'public/assets');
     }
 
     /**
-     * Set the security.salt value in the application's config file.
+     * Create .env file if it does not exist.
      *
      * @return void
      */
-    private function setSecurityKey(): void
+    public function createDotEnvFile(): void
     {
-        $newKey = 'base64:' . base64_encode(Random::bytes(32)); // TODO : créer dans la classe Random une méthode base64() et base64Safe() avec en 2éme paramétre un préfix qui pourrait être concaténé à la chaine créée.
-        $this->setSecurityKeyInFile($newKey);
+        $envFile = $this->projectRoot . '.env';
+        $envFileTemplate = $this->projectRoot . '.env.sample';
+
+        if (! file_exists($envFile)) {
+            copy($envFileTemplate, $envFile);
+            $this->io->write('Created ".env" file');
+        }
     }
 
     /**
      * Set the security key value in the .env file
      *
-     * @param string $newKey key to set in the file
+     * @param string $key Random bytes string to use as key
      *
      * @return void
      */
-    private function setSecurityKeyInFile(string $newKey): void
+    public function setSecurityKey(string $key): void
     {
-        $config = $this->rootDir . '.env';
-        $content = file_get_contents($config);
+        // TODO : créer dans la classe Random une méthode base64() et base64Safe() avec en 2éme paramétre un préfix qui pourrait être concaténé à la chaine créée.
+        $key = 'base64:' . base64_encode($key);
 
-        $content = str_replace('__KEY__', $newKey, $content, $count);
+        $path = $this->projectRoot . '.env';
+        $content = file_get_contents($path);
+
+        // Replace the placeholder with the real key.
+        $content = str_replace('__KEY__', $key, $content, $count);
         if ($count === 0) {
             $this->io->write('No security key placeholder to replace.');
 
             return;
         }
 
-        $result = file_put_contents($config, $content);
-        if ($result === false) {
-            $this->io->write('Unable to update security key value.');
-
-            return;
-        }
-
+        file_put_contents($path, $content);
         $this->io->write('Updated security key value in .env file');
     }
 
     // https://github.com/maurobonfietti/slim4-api-skeleton/blob/21d78176ed6c0df9fe724a62a78484cb8dd9bd4c/post-create-project-command.php
-    private function displayThanksMessage(): void
+    public function displayThanksMessage(): void
     {
         $this->io->write(ltrim(Core::BANNER_LOGO, "\n")); // TODO : créer une méthode dans la classe Core::getLogo(newLine: false) qui se charge de faire le ltrim !!!
         $this->io->write('Thanks for installing this project!');
