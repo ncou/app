@@ -96,7 +96,7 @@ Avec $local qui correspond à la classe php \Yiisoft\I18n\Locale::class
         <?= $this->Html->charset() ?>
         <?= $this->Html->meta('icon') ?>
         <?= $this->Html->meta('viewport', 'width=device-width, initial-scale=1') ?>
-        <?= $this->Html->css($this->Url->css('site')) ?>
+        <?= $this->Html->css('site') ?>
     </head>
     <body>
         <blockquote><?= $this->fetch('quote') ?></blockquote>
