@@ -270,6 +270,6 @@ final class Installer
     public function displayThanksMessage(): void
     {
         $this->io->write(ltrim(Core::BANNER_LOGO, "\n")); // TODO : créer une méthode dans la classe Core::getLogo(newLine: false) qui se charge de faire le ltrim !!!
-        $this->io->write('Thanks for installing this project!');
+        $this->io->write('Thanks for installing this project!'); // TODO : utiliser le tag <comment></comment> ou <fg=green>foo</> par exemple pour colorer le texte ???
     }
 }

@@ -58,15 +58,16 @@ abstract class AbstractTestCase extends DevtoolsTestCase
 
         $paths = [
             'root'    => $root,
-            'app'     => $root . '/app',
-            'runtime' => $root . '/runtime/tests/', // TODO : utiliser une truc du genre : sys_get_temp_dir() . '/chiron'
-            'cache'   => $root . '/runtime/tests/cache/', // TODO : utiliser une truc du genre : sys_get_temp_dir() . '/chiron'
+            //'app'     => $root . '/src/',
+            //'runtime' => $root . '/runtime/tests/', // TODO : utiliser une truc du genre : sys_get_temp_dir() . '/chiron'
+            //'cache'   => $root . '/runtime/tests/cache/', // TODO : utiliser une truc du genre : sys_get_temp_dir() . '/chiron'
         ];
 
+/*
         $fs = new Filesystem();
         $fs->ensureDirectoryExists($paths['runtime']);
         $fs->ensureDirectoryExists($paths['cache']);
-
+*/
         $this->app = $this->makeApp($paths);
     }
 
@@ -74,13 +75,14 @@ abstract class AbstractTestCase extends DevtoolsTestCase
     // TODO : je pense que c'est plutot une méthode tearDownAfterClass cad qui doit être appellé une seule fois pour la classe de test !!!
     protected function tearDown(): void
     {
+        /*
         $fs = new Filesystem();
 
         $runtime = $this->app->get(Directories::class)->get('@runtime');
 
         if ($fs->isDirectory($runtime)) {
             $fs->deleteDirectory($runtime);
-        }
+        }*/
     }
 
     protected function makeApp(array $paths): Application

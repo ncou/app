@@ -15,7 +15,7 @@ use App\Asset\AppAsset;
  * @var Yiisoft\Router\CurrentRoute $currentRoute
  */
 
-$assetManager->register(AppAsset::class);
+//$assetManager->register(AppAsset::class);
 
 //echo var_dump($assetManager->getCssFiles());
 //echo var_dump($assetManager->getJsFiles());
@@ -39,8 +39,8 @@ $this->addJsVars($assetManager->getJsVars());
 
 // TODO : permettre aussi de faire un $this->addMeta() pour injecter des balises meta dans la page.
 // TODO : renommer en "assignCss()" et "assignScript()" et "assignMeta()" ???
-$this->addCssFiles($assetManager->getCssFiles());
-$this->addJsFiles($assetManager->getJsFiles());
+//$this->addCssFiles($assetManager->getCssFiles());
+//$this->addJsFiles($assetManager->getJsFiles());
 
 
 /*
@@ -96,8 +96,7 @@ Avec $local qui correspond à la classe php \Yiisoft\I18n\Locale::class
         <?= $this->Html->charset() ?>
         <?= $this->Html->meta('icon') ?>
         <?= $this->Html->meta('viewport', 'width=device-width, initial-scale=1') ?>
-        <?= $this->fetch('css') ?>
-        <?= $this->fetch('script') ?>
+        <?= $this->Html->css($this->Url->css('site')) ?>
     </head>
     <body>
         <blockquote><?= $this->fetch('quote') ?></blockquote>

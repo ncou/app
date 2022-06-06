@@ -26,7 +26,7 @@ final class HomeController implements ResponseCapableInterface
         // TODO : code temporaire ajouter dans le fichier de config une section "dependencies[]" avec des références vers le container.
         // TODO : renommer la variable $result en $body
         $result = $view->render([
-            'assetManager' => container(AssetManager::class),
+            //'assetManager' => container(AssetManager::class),
             'translator'   => $translator,
         ]);
 

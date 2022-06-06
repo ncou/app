@@ -45,7 +45,7 @@ $ bin/chiron package:discover           # Auto-discover the module bootloaders
 You can launch a development web server to quickly test you application.
 
 ```bash
-$ php -S localhost:8080 -t public/
+$ php -S localhost:8000 -t public/
 ```
 or
 ```bash
